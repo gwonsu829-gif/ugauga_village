@@ -79,7 +79,8 @@
   #walkhint { position:fixed; left:12px; top:12px; margin:0; padding:8px 12px; font-size:13px; max-width:62vw; }
   #walkhint b { display:block; font-size:15px; }
   #walkside { position:fixed; right:12px; bottom:calc(26px + var(--sb)); display:flex; flex-direction:column; align-items:flex-end; gap:6px; max-width:60vw; }
-  #wstat { margin:0; padding:6px 10px; font-size:13px; font-weight:700; }
+  #wstat { margin:0; padding:6px 10px; font-size:13px; font-weight:700; transition:background .25s; }
+  #wstat.got { background:var(--gold); }
   #sheet h2.gap { margin-top:14px; }
   .list button:disabled { opacity:.55; cursor:default; }
   #menu button { min-width:0; }
@@ -197,7 +198,7 @@
     <div id="rankbox" hidden><h2 class="gap">제일 큰 알 순위</h2><div id="rank" class="list"></div></div>
     <h2 class="gap">먹이 모으는 법</h2>
     <div class="list">
-      <div><b>열매 줍기</b>산책하다 길에 떨어진 빨간 열매를 주우면 먹이를 1개 받아요.</div>
+      <div><b>열매 줍기</b>산책하다 길에 떨어진 빨간 열매를 주우면 먹이를 1개, 큰 열매는 5개 받아요.</div>
       <div><b>족장 심부름</b>산책 중에 심부름을 받아 빛기둥까지 걸어가면 먹이를 받아요. 멀수록 많이 받아요.</div>
       <div><b>둥지 먹이</b>족장이 내 집 둥지에 30분마다 하나씩 놓고 가요. 24개까지만 쌓이니 가끔 들러서 주워요.</div>
     </div>
@@ -259,6 +260,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=f16a077a"></script>
+<script type="module" src="./app.js?v=3846e09d"></script>
 </body>
 </html>
