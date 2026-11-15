@@ -102,6 +102,10 @@
   #news b { display:inline-block; margin-right:6px; padding:1px 8px; border-radius:999px; background:var(--bark); color:#fff3dc; font-size:11px; font-weight:800; vertical-align:1px; }
   #news small { display:block; margin-top:5px; padding-top:5px; border-top:1px dashed var(--line); font-size:12px; color:var(--ink2); overflow-wrap:anywhere; }
   #news:active { transform:scale(.98); }
+  @media (max-width:600px) { /* 휴대폰: 족장 소식은 한 줄로 접어 두고, 누르면 펼친다(마을이 가려지지 않게) */
+    #news:not(.open) { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    #news:not(.open) small { display:none; }
+    #news:not(.open)::after { content:"눌러서 다 보기 ›"; } }
   /* 오른쪽 위: 알 받기·먹이·시계 */
   #tr { position:fixed; top:calc(10px + env(safe-area-inset-top,0px)); right:10px; display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
   #join { padding:0 16px 0 13px; border-radius:999px; }
@@ -210,8 +214,16 @@
   #walkend { position:fixed; right:10px; top:calc(10px + env(safe-area-inset-top,0px)); border-radius:999px; padding:0 18px 0 14px; }
   #walkhint { position:fixed; left:10px; top:calc(10px + env(safe-area-inset-top,0px)); margin:0; padding:10px 14px; font-size:12.5px; line-height:1.5; color:var(--ink2); max-width:calc(100vw - 140px); border-radius:var(--r-md); }
   #walkhint b { display:block; font-family:var(--head); font-weight:400; font-size:17px; color:var(--ink); margin-bottom:2px; }
+  #walkhint.mini { font-size:0; padding:8px 12px; cursor:pointer; } /* 몇 초 뒤 이름만 남긴다. 누르면 다시 펼친다 */
+  #walkhint.mini b { margin:0; font-size:15px; }
+  #walkhint.mini b::after { content:" ›"; color:var(--ink2); }
+  .arrow { position:fixed; left:0; top:0; z-index:5; display:flex; flex-direction:column; align-items:center; gap:3px; transform:translate(-50%,-50%); pointer-events:none; }
+  .arrow i { width:0; height:0; border-left:12px solid transparent; border-right:12px solid transparent; border-bottom:22px solid #e8324f; transform:rotate(var(--a)); filter:drop-shadow(0 2px 0 rgba(46,36,24,.45)); }
+  .arrow.job i { border-bottom-color:#ffc53d; border-left-width:15px; border-right-width:15px; border-bottom-width:28px; }
+  .arrow span { padding:2px 8px; border:2px solid var(--edge); border-radius:10px; background:#fffaf0; font-size:12px; font-weight:800; white-space:nowrap; }
+  .arrow span:empty { display:none; }
   #walkside { position:fixed; right:10px; bottom:calc(24px + var(--sb)); display:flex; flex-direction:column; align-items:flex-end; gap:8px; max-width:calc(100vw - 180px); }
-  #wstat { margin:0; padding:9px 14px; font-size:13px; font-weight:800; border-radius:var(--r-md); transition:background .25s, transform .25s; }
+  #wstat { margin:0; white-space:pre-line; padding:9px 14px; font-size:13px; font-weight:800; border-radius:var(--r-md); transition:background .25s, transform .25s; }
   #wstat.got { background:linear-gradient(180deg,#ffe08a,var(--gold)); transform:scale(1.06); }
   @media (pointer:fine) { #stick { display:none; } }
 
@@ -223,7 +235,7 @@
 
   #load { position:fixed; inset:0; z-index:20; display:grid; place-content:center; justify-items:center; text-align:center; padding:24px;
     background:radial-gradient(circle at 50% 36%, #fff0d2 0, #f8cc93 42%, #e89c5a 100%); transition:opacity .5s; }
-  #load.done { opacity:0; pointer-events:none; }
+  #load.done { display:none; } /* 서서히 사라지게 했더니 첫 안내 카드 뒤로 "마을 짓는 중" 글씨가 비쳤다 */
   #load .badge { width:min(54vw,220px); aspect-ratio:1; border-radius:50%; overflow:hidden; background:#ffeccb; border:6px solid #fffaf0;
     box-shadow:0 0 0 10px rgba(255,250,240,.35), 0 14px 0 rgba(46,36,24,.14); animation:bob 1.8s ease-in-out infinite; }
   #load img { width:100%; height:100%; display:block; object-fit:cover; transform:scale(1.14) translateY(2%); }
@@ -346,8 +358,9 @@
     <div id="rankbox" hidden><h2 class="gap">제일 큰 알 순위</h2><div id="rank" class="list"></div></div>
     <h2 class="gap">먹이 모으는 법</h2>
     <div class="list">
-      <div><b>열매 줍기</b>산책하다 길에 떨어진 빨간 열매를 주우면 먹이를 1개, 큰 열매는 5개 받아요.</div>
-      <div><b>족장 심부름</b>산책 중에 심부름을 받아 빛기둥까지 걸어가면 먹이 50개를 받아요. 하루 5번까지 할 수 있어요.</div>
+      <div><b>길에 떨어진 먹이 줍기</b>산책하다 주우면 빨간 열매 1개, 버섯 2개, 고기 3개, 큰 열매 5개를 받아요. 화면 가장자리의 빨간 화살표가 가까운 먹이 쪽을 가리켜요.</div>
+      <div><b>오늘의 금빛 뼈</b>날마다 마을 길 어딘가에 금빛 뼈가 하나 숨어 있어요. 찾으면 먹이 30개를 받아요. 산책을 시작하면 어느 동네에 있는지 알려 줘요.</div>
+      <div><b>족장 심부름</b>산책 중에 심부름을 받아 빛기둥까지 걸어가면 먹이 50개를 받아요. 금빛 화살표가 길을 알려 줘요. 하루 5번까지 할 수 있어요.</div>
       <div><b>둥지 먹이</b>족장이 내 집 둥지에 30분마다 하나씩 놓고 가요. 24개까지만 쌓이니 가끔 들러서 주워요.</div>
     </div>
   </div>
@@ -367,6 +380,8 @@
   <p id="walkhint" class="box"></p>
   <button id="walkend" class="ic">산책 끝</button>
   <div id="stick"><i></i></div>
+  <div id="ajob" class="arrow job" hidden><i></i><span></span></div>
+  <div id="afood" class="arrow" hidden><i></i><span></span></div>
   <div id="walkside">
     <p id="wstat" class="box"></p>
     <button id="errand" class="mini ic"></button>
@@ -435,6 +450,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=1c553deb"></script>
+<script type="module" src="./app.js?v=719705cf"></script>
 </body>
 </html>
