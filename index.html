@@ -257,6 +257,19 @@
   #mbob.hit { animation:shake .12s linear 3; }
   @keyframes bobf { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
   @keyframes shake { 0%,100% { transform:translate(0,0) rotate(0); } 25% { transform:translate(-4px,2px) rotate(-8deg); } 75% { transform:translate(4px,-2px) rotate(8deg); } }
+  /* 자유 채팅(산책 중 왼쪽): 최근 말 + 입력칸. 휴대폰은 조이스틱 위, 마우스 화면은 맨 아래 */
+  #chat { position:fixed; left:10px; bottom:calc(170px + var(--sb)); width:min(300px,calc(100vw - 190px)); padding:8px; border-radius:var(--r-md); display:grid; gap:6px; }
+  #chat:has(#clog:empty):has(#cform[hidden]) { display:none; }
+  @media (pointer:fine) { #chat { bottom:calc(24px + var(--sb)); } }
+  #clog { max-height:132px; overflow:auto; font-size:12.5px; line-height:1.4; display:grid; gap:3px; }
+  #clog:empty { display:none; }
+  #clog p { margin:0; overflow-wrap:anywhere; }
+  #clog b { color:#7a4d1f; margin-right:3px; }
+  #clog .rep { margin-left:4px; min-height:0; padding:1px 7px; font-size:10.5px; border-radius:999px; background:none; border:1px solid rgba(94,69,48,.3); color:var(--ink2); box-shadow:none; }
+  #cform { display:flex; gap:6px; }
+  #cform[hidden] { display:none; }
+  #cform input { min-height:38px; padding:0 10px; flex:1; }
+  #cform button { min-height:38px; padding:0 10px; font-size:12.5px; border-radius:999px; }
   #saybox { display:grid; grid-template-columns:repeat(2,auto); gap:6px; }
   #saybox button { min-height:40px; padding:0 10px; font-size:12.5px; border-radius:999px; white-space:nowrap; }
   #saybox .move { background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); }
@@ -454,6 +467,7 @@
   <div id="stick"><i></i></div>
   <div id="ajob" class="arrow job" hidden><i></i><span></span></div>
   <div id="afood" class="arrow" hidden><i></i><span></span></div>
+  <div id="chat" class="box"><div id="clog"></div><form id="cform" hidden><input id="cin" maxlength="40" aria-label="채팅" placeholder="마을에 한마디 (40자)" autocomplete="off" enterkeyhint="send"><button>보내기</button></form></div>
   <div id="aev" class="arrow job" hidden><i></i><span></span></div>
   <div id="walkside">
     <div id="saybox" hidden></div>
@@ -503,6 +517,14 @@
   </div>
 </dialog>
 
+<dialog id="pin" class="box">
+  <h2 id="pinh"></h2>
+  <p id="pinp"></p>
+  <form id="pinf" class="row"><input id="pinv" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="숫자 4자리" placeholder="숫자 4자리"><button>확인</button></form>
+  <p id="pinmsg" class="note"></p>
+  <div class="end"><button class="ghost" id="pinx">구경만 할게요</button></div>
+</dialog>
+
 <dialog id="peek" class="box">
   <h2 id="kh"></h2>
   <canvas id="kpic" width="440" height="440"></canvas>
@@ -526,6 +548,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=693e80d5"></script>
+<script type="module" src="./app.js?v=695ae46d"></script>
 </body>
 </html>
