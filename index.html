@@ -222,10 +222,51 @@
   .arrow.job i { border-bottom-color:#ffc53d; border-left-width:15px; border-right-width:15px; border-bottom-width:28px; }
   .arrow span { padding:2px 8px; border:2px solid var(--edge); border-radius:10px; background:#fffaf0; font-size:12px; font-weight:800; white-space:nowrap; }
   .arrow span:empty { display:none; }
+  #aev i { border-bottom-color:#ff7a2a; }
+  #sayb { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linejoin='round'><path d='M4 5h16v11H10l-4 4v-4H4z'/></svg>"); }
+  #spotact { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linejoin='round'><path d='M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z'/></svg>"); }
+  body:has(#card:not([hidden])) #evbar, body:has(#sheet:not([hidden])) #evbar { display:none; }
   #walkside { position:fixed; right:10px; bottom:calc(24px + var(--sb)); display:flex; flex-direction:column; align-items:flex-end; gap:8px; max-width:calc(100vw - 180px); }
   #wstat { margin:0; white-space:pre-line; padding:9px 14px; font-size:13px; font-weight:800; border-radius:var(--r-md); transition:background .25s, transform .25s; }
   #wstat.got { background:linear-gradient(180deg,#ffe08a,var(--gold)); transform:scale(1.06); }
   @media (pointer:fine) { #stick { display:none; } }
+  /* ── 매일 놀거리·실시간 행사(2026-11-16) ── */
+  #qbtn { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linejoin='round'><path d='M5 21V4h11l-2 4 2 4H5'/></svg>"); }
+  #qbtn.hot { background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); animation:nudge 1.6s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform:none; } 50% { transform:scale(1.06); } }
+  #online { padding:4px 11px; font-size:12px; font-weight:800; color:#2f6b1e; border-radius:999px; }
+  #online::before { content:""; display:inline-block; width:7px; height:7px; margin-right:5px; border-radius:50%; background:#3fbf4a; box-shadow:0 0 0 3px rgba(63,191,74,.25); vertical-align:1px; }
+  #toast { position:fixed; left:50%; top:calc(150px + env(safe-area-inset-top,0px)); transform:translateX(-50%); z-index:8; display:grid; gap:6px; justify-items:center; pointer-events:none; width:min(420px,calc(100vw - 24px)); }
+  body.walking #toast { top:calc(118px + env(safe-area-inset-top,0px)); }
+  #toast p { margin:0; padding:8px 14px; border-radius:16px; background:rgba(46,36,24,.9); color:#fff6e2; font-size:13px; font-weight:800; text-align:center; word-break:keep-all; animation:pop .3s; box-shadow:0 6px 16px rgba(43,29,16,.3); }
+  #evbar { position:fixed; left:50%; bottom:calc(150px + var(--sb)); transform:translateX(-50%); z-index:6; display:flex; align-items:center; gap:10px; padding:6px 6px 6px 14px; border-radius:999px; font-size:13px; font-weight:800; color:#4a2a08;
+    background:linear-gradient(180deg,#ffe48f,var(--gold)); border:2px solid var(--edge); box-shadow:0 4px 0 var(--goldsh), 0 8px 18px rgba(43,29,16,.25); white-space:nowrap; max-width:calc(100vw - 20px); }
+  #evbar.boom { background:linear-gradient(180deg,#ffb27a,#ff7a3a); color:#3a1404; }
+  #evbar.camp { background:linear-gradient(180deg,#ffd7a0,#f6a35a); }
+  #evbar span { overflow:hidden; text-overflow:ellipsis; }
+  #evbar button { flex:none; min-height:36px; padding:0 14px; font-size:12.5px; border-radius:999px; }
+  body.walking #evbar { bottom:auto; top:calc(64px + env(safe-area-inset-top,0px)); padding-right:14px; }
+  body.walking #evbar button { display:none; }
+  #mini { position:fixed; left:50%; top:46%; transform:translate(-50%,-50%); z-index:9; width:min(320px,calc(100vw - 32px)); padding:18px 16px 14px; text-align:center; display:grid; gap:10px; }
+  #mini b { font-family:var(--head); font-weight:400; font-size:24px; }
+  #mini p { margin:0; font-size:13.5px; line-height:1.5; color:var(--ink2); word-break:keep-all; }
+  #mini #mb { min-height:56px; font-size:17px; }
+  #mbob { justify-self:center; width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff,#ff6a5a 45%,#c2321f); border:3px solid #fff; box-shadow:0 6px 0 rgba(43,29,16,.15); animation:bobf 1.6s ease-in-out infinite; }
+  #mbob.bite { animation:shake .12s linear infinite; }
+  #mbob.dig { border-radius:12px; background:radial-gradient(circle at 40% 30%,#e8c890,#b08050 60%,#7a5530); animation:none; }
+  #mbob.hit { animation:shake .12s linear 3; }
+  @keyframes bobf { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
+  @keyframes shake { 0%,100% { transform:translate(0,0) rotate(0); } 25% { transform:translate(-4px,2px) rotate(-8deg); } 75% { transform:translate(4px,-2px) rotate(8deg); } }
+  #saybox { display:grid; grid-template-columns:repeat(2,auto); gap:6px; }
+  #saybox button { min-height:40px; padding:0 12px; font-size:13px; border-radius:999px; }
+  .dots { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin:0 0 6px; }
+  .dots span, .chips span { display:grid; place-items:center; padding:6px 2px; border-radius:10px; background:#fff; border:1px solid var(--line); font-size:11px; font-weight:800; color:var(--ink2); white-space:pre-line; text-align:center; line-height:1.3; word-break:keep-all; }
+  .dots span.on, .chips span.on { color:#4a2a08; background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); }
+  .dots span.today { box-shadow:0 0 0 3px rgba(255,197,61,.45); }
+  .chips { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin:0 0 6px; }
+  #qmis .ok { background:linear-gradient(180deg,#f1f8e2,#dcefc6); }
+  #qchest { width:100%; margin:4px 0 6px; }
+  .note { font-size:12.5px; color:var(--ink2); margin:0 0 8px; }
 
   /* 상황마다 숨기기: 산책·첫 화면·촬영 중에는 위아래 판을 감춘다. 판이 열리면 "다음 할 일"은 잠깐 숨긴다 */
   body.walking :is(#hud,#news,#tr,#side,#menu,#sheet,#card,#next), body.intro :is(#hud,#news,#tr,#side,#menu,#sheet,#card,#next), body.shoot :is(#medal,#news,#tr,#side,#menu,#sheet,#intro,#hud small,#next) { display:none !important; }
@@ -269,6 +310,7 @@
   #photo img { display:block; width:100%; max-height:56vh; object-fit:contain; border-radius:16px; margin-bottom:10px; background:#e9dcc3; box-shadow:0 6px 18px rgba(43,29,16,.2); }
   @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
+
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -298,8 +340,13 @@
 <div id="tr">
   <button id="join" class="ic">알 받기</button>
   <button id="purse" class="mini ic" aria-label="먹이 메뉴 열기"></button>
+  <button id="qbtn" class="mini ic" hidden>오늘 미션</button>
   <div id="clock" class="box"></div>
+  <div id="online" class="box" hidden></div>
 </div>
+<div id="toast"></div>
+<div id="evbar" hidden><span></span><button class="dark"></button></div>
+<div id="mini" class="box" hidden><i id="mbob"></i><b id="mt"></b><p id="mp"></p><button id="mb"></button><button id="mx" class="ghost">그만하기</button></div>
 <div id="side">
   <button id="snd" class="mini ic">마을 소리 켜기</button>
   <button id="ride" class="mini ic">익룡 따라가기</button>
@@ -350,6 +397,27 @@
     <div class="bar"><i id="erabar"></i></div>
     <div id="eras" class="list"></div>
   </div>
+  <div data-tab="quest">
+    <h2>오늘 미션</h2>
+    <p class="note" id="qsn"></p>
+    <div id="qstreak" class="dots"></div>
+    <h2 class="gap">족장이 주는 미션</h2>
+    <div id="qmis" class="list"></div>
+    <button id="qchest" class="ic"></button>
+    <h2 class="gap">명소 도장</h2>
+    <p class="note">산책하며 명소에 가면 저절로 찍혀요. 하나에 먹이 10개, 다섯 개 다 찍으면 50개 더.</p>
+    <div id="qstamp" class="chips"></div>
+    <h2 class="gap">화석 모으기</h2>
+    <p class="note" id="qfn"></p>
+    <div id="qfos" class="chips"></div>
+    <h2 class="gap">마을 행사</h2>
+    <div class="list">
+      <div><b>먹이 비</b>하루 네 번, 언제 올지 몰라요. 5분 동안 하늘에서 황금 열매 30개가 떨어져요. 먼저 줍는 사람 것, 하나에 먹이 8개.</div>
+      <div><b>화산 분출</b>매시 정각부터 3분. 화산에서 불씨 열매 12개가 튀어나와요. 하나에 먹이 15개.</div>
+      <div><b>모닥불 모임</b>밤 9시부터 10분. 그때 모닥불 광장에 모인 사람이 많을수록 다 같이 먹이를 더 받아요.</div>
+    </div>
+    <p class="note" id="qleft"></p>
+  </div>
   <div data-tab="shell">
     <h2>먹이</h2>
     <p><b id="shn"></b> 먹이를 주면 내 알이 커지고, 마을에 온 모든 사람에게 그 크기로 보여요. 많이 먹은 알에서는 남다른 아기 공룡이 나와요.</p>
@@ -362,6 +430,9 @@
       <div><b>오늘의 금빛 뼈</b>날마다 마을 길 어딘가에 금빛 뼈가 하나 숨어 있어요. 찾으면 먹이 30개를 받아요. 산책을 시작하면 어느 동네에 있는지 알려 줘요.</div>
       <div><b>족장 심부름</b>산책 중에 심부름을 받아 빛기둥까지 걸어가면 먹이 50개를 받아요. 금빛 화살표가 길을 알려 줘요. 하루 5번까지 할 수 있어요.</div>
       <div><b>둥지 먹이</b>족장이 내 집 둥지에 30분마다 하나씩 놓고 가요. 24개까지만 쌓이니 가끔 들러서 주워요.</div>
+      <div><b>매일 출석과 미션</b>날마다 들어오면 연속 출석 먹이를 받아요(7일째 200개). 오른쪽 위 "오늘 미션"의 족장 미션 셋을 다 하면 보물 상자에서 먹이 150개.</div>
+      <div><b>명소 놀이</b>첨벙 웅덩이에서 낚시(하루 5번), 큰 공룡 뼈에서 화석 파기(하루 3번), 우르릉 화산에서 알 데우기(30분 동안 먹인 먹이 1.5배), 모닥불 광장에 가만히 서 있으면 2분마다 먹이 10개.</div>
+      <div><b>이웃 알 쓰다듬기</b>남의 집을 눌러 알을 쓰다듬으면 나도 그 사람도 먹이 5개씩. 하루 5번.</div>
     </div>
   </div>
 </section>
@@ -382,8 +453,12 @@
   <div id="stick"><i></i></div>
   <div id="ajob" class="arrow job" hidden><i></i><span></span></div>
   <div id="afood" class="arrow" hidden><i></i><span></span></div>
+  <div id="aev" class="arrow job" hidden><i></i><span></span></div>
   <div id="walkside">
+    <div id="saybox" hidden></div>
     <p id="wstat" class="box"></p>
+    <button id="spotact" class="ic" hidden></button>
+    <button id="sayb" class="mini ic" hidden>말 걸기</button>
     <button id="errand" class="mini ic"></button>
   </div>
 </div>
@@ -450,6 +525,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=512baa9d"></script>
+<script type="module" src="./app.js?v=2e4de8ff"></script>
 </body>
 </html>
