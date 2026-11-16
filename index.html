@@ -258,7 +258,8 @@
   @keyframes bobf { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
   @keyframes shake { 0%,100% { transform:translate(0,0) rotate(0); } 25% { transform:translate(-4px,2px) rotate(-8deg); } 75% { transform:translate(4px,-2px) rotate(8deg); } }
   #saybox { display:grid; grid-template-columns:repeat(2,auto); gap:6px; }
-  #saybox button { min-height:40px; padding:0 12px; font-size:13px; border-radius:999px; }
+  #saybox button { min-height:40px; padding:0 10px; font-size:12.5px; border-radius:999px; white-space:nowrap; }
+  #saybox .move { background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); }
   .dots { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin:0 0 6px; }
   .dots span, .chips span { display:grid; place-items:center; padding:6px 2px; border-radius:10px; background:#fff; border:1px solid var(--line); font-size:11px; font-weight:800; color:var(--ink2); white-space:pre-line; text-align:center; line-height:1.3; word-break:keep-all; }
   .dots span.on, .chips span.on { color:#4a2a08; background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); }
@@ -525,6 +526,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=2e4de8ff"></script>
+<script type="module" src="./app.js?v=693e80d5"></script>
 </body>
 </html>
