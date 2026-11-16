@@ -229,6 +229,7 @@
   #walkside { position:fixed; right:10px; bottom:calc(24px + var(--sb)); display:flex; flex-direction:column; align-items:flex-end; gap:8px; max-width:calc(100vw - 180px); }
   #wstat { margin:0; white-space:pre-line; padding:9px 14px; font-size:13px; font-weight:800; border-radius:var(--r-md); transition:background .25s, transform .25s; }
   #wstat.got { background:linear-gradient(180deg,#ffe08a,var(--gold)); transform:scale(1.06); }
+  #stick.run { box-shadow:0 0 0 4px rgba(255,190,60,.55), 0 0 22px rgba(255,170,40,.6); }
   @media (pointer:fine) { #stick { display:none; } }
   /* ── 매일 놀거리·실시간 행사(2026-11-16) ── */
   #qbtn { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linejoin='round'><path d='M5 21V4h11l-2 4 2 4H5'/></svg>"); }
@@ -291,6 +292,16 @@
   body.walking :is(#hud,#news,#tr,#side,#menu,#sheet,#card,#next), body.intro :is(#hud,#news,#tr,#side,#menu,#sheet,#card,#next), body.shoot :is(#medal,#news,#tr,#side,#menu,#sheet,#intro,#hud small,#next) { display:none !important; }
   body:has(#sheet:not([hidden])) #next, body:has(#card:not([hidden])) :is(#next,#side), body:has(dialog[open]) #next, body:has(#sheet:not([hidden])) #side { display:none; }
   /* 키가 작은 화면(가로 휴대폰): 족장 말과 다음 할 일은 숨기고 판은 낮게 */
+  @media (orientation:landscape) and (max-height:520px) { /* 휴대폰 가로 모드(11-16 밤): 화면 높이가 낮으니 조이스틱·안내·사진을 줄여 마을이 보이게 */
+    #stick { width:108px; height:108px; left:max(14px, env(safe-area-inset-left,0px)); bottom:12px; }
+    #stick i { width:48px; height:48px; margin:-24px; }
+    #walkhint { max-width:min(56vw,460px); font-size:12px; max-height:38vh; overflow:auto; }
+    #walkside { bottom:10px; right:max(10px, env(safe-area-inset-right,0px)); gap:6px; }
+    #chat { left:auto; right:max(8px, env(safe-area-inset-right,0px)); margin:0; width:min(380px,52vw); }
+    #clog { max-height:min(34vh,140px); }
+    #kpic, #ppic { width:min(150px,34vh); }
+    dialog { width:min(460px,calc(100vw - 24px)); }
+  }
   @media (max-height:520px) { #news, #next { display:none; } #sheet { max-height:calc(100vh - 110px); } #side { bottom:calc(84px + var(--sb)); } }
 
   #load { position:fixed; inset:0; z-index:20; display:grid; place-content:center; justify-items:center; text-align:center; padding:24px;
@@ -322,7 +333,19 @@
   dialog .end { display:flex; flex-wrap:wrap; gap:8px; }
   dialog .end > * { flex:1 1 40%; }
   dialog .end > :not(.ghost) { flex-basis:100%; order:-1; min-height:52px; font-size:16px; }
-  #kpic { display:block; width:min(220px,60vw); aspect-ratio:1; margin:0 auto 6px; border-radius:50%; background:radial-gradient(circle at 50% 42%,#fff6dc,#ffe4a8 55%,#f7c977); box-shadow:inset 0 -6px 0 rgba(185,101,12,.15), 0 8px 20px rgba(185,101,12,.2); }
+  #ppic.r1 { background:radial-gradient(circle at 50% 42%,#fff3c4,#ffd86a 55%,#e9a72a); } /* 황금 공룡 */
+  #ppic.r2 { background:radial-gradient(circle at 50% 42%,#fffaf2 30%,transparent 72%),conic-gradient(#ffd1dc,#ffe7b8,#d9f7c8,#c8ecff,#e3d4ff,#ffd1dc); } /* 무지개 공룡 */
+  #prof h2, #duel h2 { margin-right:44px; }
+  #pname { display:block; text-align:center; font-family:var(--head); font-weight:400; font-size:21px; margin-bottom:6px; word-break:keep-all; }
+  #pinfo { text-align:center; word-break:keep-all; }
+  #duel { position:fixed; inset:auto 0 calc(10px + var(--sb, 0px)) 0; margin:0 auto; z-index:15; width:min(440px,calc(100vw - 20px)); max-height:52vh; padding:16px 16px 14px; box-shadow:0 10px 30px rgba(43,29,16,.35); } /* 모달이 아니라 아래 판: 위에서 박치기가 보이게 */
+  #duel h2 { font-size:20px; margin-bottom:6px; }
+  #dub { display:grid; gap:8px; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); }
+  #dub button { min-height:50px; font-size:16px; }
+  #dum { font-size:14px; color:var(--ink); word-break:keep-all; }
+  #clog b.who { cursor:pointer; text-decoration:underline dotted rgba(122,77,31,.5); text-underline-offset:3px; }
+  #duelb { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linejoin='round'><path d='M3 14l5-5 3 3 5-5 5 5'/><path d='M3 19h18'/></svg>"); }
+  #kpic, #ppic { display:block; width:min(220px,60vw); aspect-ratio:1; margin:0 auto 6px; border-radius:50%; background:radial-gradient(circle at 50% 42%,#fff6dc,#ffe4a8 55%,#f7c977); box-shadow:inset 0 -6px 0 rgba(185,101,12,.15), 0 8px 20px rgba(185,101,12,.2); }
   #kname { display:block; text-align:center; font-family:var(--head); font-weight:400; font-size:24px; margin-bottom:6px; }
   #kmsg { text-align:center; }
   #award h2 { margin-right:44px; }
@@ -451,7 +474,7 @@
       <div><b>족장 심부름</b>산책 중에 심부름을 받아 빛기둥까지 걸어가면 먹이 50개를 받아요. 금빛 화살표가 길을 알려 줘요. 하루 5번까지 할 수 있어요.</div>
       <div><b>둥지 먹이</b>족장이 내 집 둥지에 30분마다 하나씩 놓고 가요. 24개까지만 쌓이니 가끔 들러서 주워요.</div>
       <div><b>매일 출석과 미션</b>날마다 들어오면 연속 출석 먹이를 받아요(7일째 200개). 오른쪽 위 "오늘 미션"의 족장 미션 셋을 다 하면 보물 상자에서 먹이 150개.</div>
-      <div><b>명소 놀이</b>첨벙 웅덩이에서 낚시(하루 5번), 큰 공룡 뼈에서 화석 파기(하루 3번), 우르릉 화산에서 알 데우기(30분 동안 먹인 먹이 1.5배), 모닥불 광장에 가만히 서 있으면 2분마다 먹이 10개.</div>
+      <div><b>명소 놀이</b>첨벙 웅덩이에서 낚시(하루 5번), 큰 공룡 뼈에서 화석 파기(하루 3번), 우르릉 화산에서 알 데우기(30분 동안 먹인 먹이 1.5배), 모닥불 광장에 가만히 서 있으면 1분마다 먹이 15개.</div>
       <div><b>이웃 알 쓰다듬기</b>남의 집을 눌러 알을 쓰다듬으면 나도 그 사람도 먹이 5개씩. 하루 5번.</div>
     </div>
   </div>
@@ -481,6 +504,7 @@
     <button id="spotact" class="ic" hidden></button>
     <button id="chatb" class="mini ic">채팅</button>
     <button id="sayb" class="mini ic" hidden>말 걸기</button>
+    <button id="duelb" class="mini ic" hidden>박치기 대결</button>
     <button id="errand" class="mini ic"></button>
   </div>
 </div>
@@ -544,6 +568,22 @@
   </div>
 </dialog>
 
+<dialog id="prof" class="box">
+  <button class="x" id="prx">닫기</button>
+  <h2 id="ph"></h2>
+  <canvas id="ppic" width="440" height="440"></canvas>
+  <b id="pname"></b>
+  <p id="pinfo"></p>
+  <div class="end"><button id="pgo" class="ghost">집 보러 가기</button></div>
+</dialog>
+
+<dialog id="duel" class="box">
+  <button class="x" id="dux">닫기</button>
+  <h2 id="duh">박치기 대결</h2>
+  <p id="dum"></p>
+  <div id="dub"></div>
+</dialog>
+
 <dialog id="award" class="box">
   <button class="x" id="awx">닫기</button>
   <h2>먹이 순위 정해졌다! 우가</h2>
@@ -562,6 +602,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=22080c54"></script>
+<script type="module" src="./app.js?v=70e89a39"></script>
 </body>
 </html>
