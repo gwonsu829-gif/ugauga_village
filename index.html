@@ -232,6 +232,8 @@
   @media (pointer:fine) { #stick { display:none; } }
   /* ── 매일 놀거리·실시간 행사(2026-11-16) ── */
   #qbtn { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linejoin='round'><path d='M5 21V4h11l-2 4 2 4H5'/></svg>"); }
+  #chatb { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linejoin='round'><path d='M4 6h16v10H9l-5 4z'/><path d='M8 10h8M8 13h5'/></svg>"); }
+  #chatb.hot { background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); }
   #qbtn.hot { background:linear-gradient(180deg,#ffe08a,var(--gold)); border-color:var(--edge); animation:nudge 1.6s ease-in-out infinite; }
   @keyframes nudge { 0%,100% { transform:none; } 50% { transform:scale(1.06); } }
   #online { padding:4px 11px; font-size:12px; font-weight:800; color:#2f6b1e; border-radius:999px; }
@@ -257,11 +259,14 @@
   #mbob.hit { animation:shake .12s linear 3; }
   @keyframes bobf { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
   @keyframes shake { 0%,100% { transform:translate(0,0) rotate(0); } 25% { transform:translate(-4px,2px) rotate(-8deg); } 75% { transform:translate(4px,-2px) rotate(8deg); } }
-  /* 자유 채팅(산책 중 왼쪽): 최근 말 + 입력칸. 휴대폰은 조이스틱 위, 마우스 화면은 맨 아래 */
-  #chat { position:fixed; left:10px; bottom:calc(170px + var(--sb)); width:min(300px,calc(100vw - 190px)); padding:8px; border-radius:var(--r-md); display:grid; gap:6px; }
-  #chat:has(#clog:empty):has(#cform[hidden]) { display:none; }
-  @media (pointer:fine) { #chat { bottom:calc(24px + var(--sb)); } }
-  #clog { max-height:132px; overflow:auto; font-size:12.5px; line-height:1.4; display:grid; gap:3px; }
+  /* 자유 채팅: 평소엔 오른쪽 "채팅" 버튼(안 읽은 수)만. 누르면 화면 위쪽에 열린다(아래에 두면 휴대폰 키보드가 입력칸을 가린다) */
+  #chat { position:fixed; left:8px; right:8px; top:calc(8px + env(safe-area-inset-top,0px)); z-index:9; max-width:420px; margin:0 auto; padding:12px 12px 10px; border-radius:var(--r-md); display:grid; gap:8px; }
+  #chat[hidden] { display:none; }
+  #chat > b { font-family:var(--head); font-weight:400; font-size:17px; margin-right:48px; }
+  #chat .x { top:4px; right:4px; }
+  #cnone { margin:0; font-size:12.5px; color:var(--ink2); }
+  #clog:not(:empty) + #cnone, #cpin[hidden] { display:none; }
+  #clog { max-height:min(30vh,200px); overflow:auto; font-size:13px; line-height:1.45; display:grid; gap:4px; }
   #clog:empty { display:none; }
   #clog p { margin:0; overflow-wrap:anywhere; }
   #clog b { color:#7a4d1f; margin-right:3px; }
@@ -467,12 +472,13 @@
   <div id="stick"><i></i></div>
   <div id="ajob" class="arrow job" hidden><i></i><span></span></div>
   <div id="afood" class="arrow" hidden><i></i><span></span></div>
-  <div id="chat" class="box"><div id="clog"></div><form id="cform" hidden><input id="cin" maxlength="40" aria-label="채팅" placeholder="마을에 한마디 (40자)" autocomplete="off" enterkeyhint="send"><button>보내기</button></form></div>
+  <div id="chat" class="box" hidden><button class="x">닫기</button><b>마을 채팅</b><div id="clog"></div><p id="cnone" class="note">아직 아무도 말하지 않았어요.</p><form id="cform" hidden><input id="cin" maxlength="40" aria-label="채팅" placeholder="마을에 한마디 (40자)" autocomplete="off" enterkeyhint="send"><button>보내기</button></form><button id="cpin" class="ghost">PIN 넣고 채팅하기</button></div>
   <div id="aev" class="arrow job" hidden><i></i><span></span></div>
   <div id="walkside">
     <div id="saybox" hidden></div>
     <p id="wstat" class="box"></p>
     <button id="spotact" class="ic" hidden></button>
+    <button id="chatb" class="mini ic">채팅</button>
     <button id="sayb" class="mini ic" hidden>말 걸기</button>
     <button id="errand" class="mini ic"></button>
   </div>
@@ -548,6 +554,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=695ae46d"></script>
+<script type="module" src="./app.js?v=94280964"></script>
 </body>
 </html>
