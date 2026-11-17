@@ -303,7 +303,7 @@
   .dots span.today { box-shadow:0 0 0 3px rgba(255,197,61,.45); }
   .chips { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin:0 0 6px; }
   #qmis .ok { background:linear-gradient(180deg,#f1f8e2,#dcefc6); }
-  #qchest { width:100%; margin:4px 0 6px; }
+  #qchest { width:100%; margin:4px 0 6px; } #qad { width:100%; margin:0 0 6px; } /* 앱 보상형 광고(11-17) */
   .note { font-size:12.5px; color:var(--ink2); margin:0 0 8px; }
 
   /* 상황마다 숨기기: 산책·첫 화면·촬영 중에는 위아래 판을 감춘다. 판이 열리면 "다음 할 일"은 잠깐 숨긴다 */
@@ -683,6 +683,7 @@
     <h2 class="gap">족장이 주는 미션</h2>
     <div id="qmis" class="list"></div>
     <button id="qchest" class="ic"></button>
+    <button id="qad" hidden></button>
     <h2 class="gap">명소 도장</h2>
     <p class="note">산책하며 명소에 가면 저절로 찍혀요. 하나에 먹이 10개, 다섯 개 다 찍으면 50개 더.</p>
     <div id="qstamp" class="chips"></div>
@@ -879,6 +880,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=9c47ac71"></script>
+<script type="module" src="./app.js?v=822970a3"></script>
 </body>
 </html>
