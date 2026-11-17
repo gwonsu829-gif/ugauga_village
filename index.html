@@ -72,7 +72,7 @@
   #errand { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'><path d='M6 21V3.5M6 4h12l-3 4.2 3 4.3H6'/></svg>"); }
   #cphoto, #kphoto { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'><path d='M3.5 8h3.5l1.7-2.8h6.6L17 8h3.5v11.5h-17z'/><circle cx='12' cy='13.3' r='3.4'/></svg>"); }
   #cinvite { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'><circle cx='9' cy='8.5' r='3.3'/><path d='M3 19.5c.5-3.4 2.9-5.3 6-5.3s5.5 1.9 6 5.3M19 8.5v6M16 11.5h6'/></svg>"); }
-  #ccare, #cpair { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 20.5S3.8 15.6 3.8 9.6A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8.2 2.6c0 6-8.2 10.9-8.2 10.9z'/></svg>"); }
+  #ccare, #cpair, #clike { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 20.5S3.8 15.6 3.8 9.6A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8.2 2.6c0 6-8.2 10.9-8.2 10.9z'/></svg>"); }
   #clink, #iglink { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2'><rect x='3.5' y='3.5' width='17' height='17' rx='5'/><circle cx='12' cy='12' r='3.8'/><circle cx='17.2' cy='6.8' r='.4' stroke-width='1.8'/></svg>"); }
   #psave { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3.5v11.5M7.2 10.5L12 15.3l4.8-4.8M4.5 20h15'/></svg>"); }
   #pshare { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 15V3.5M7.8 7.5L12 3.3l4.2 4.2M5.5 11v9h13v-9'/></svg>"); }
@@ -164,6 +164,7 @@
   .list > button::after { content:""; position:absolute; right:16px; top:50%; width:9px; height:9px; margin-top:-5px; border-right:2.5px solid currentColor; border-top:2.5px solid currentColor; transform:rotate(45deg); opacity:.45; }
   .list > button:active:not(:disabled) { transform:scale(.985); box-shadow:none; }
   .list b { display:block; font-size:15px; font-weight:800; color:var(--ink); margin-bottom:1px; }
+  .list .now b { color:#3a2410; } /* 노란 바탕 위 제목 글자가 묻히지 않게 */
   .list .now { color:#5a3410; background:linear-gradient(180deg,#ffe48f,var(--gold)); border:2px solid var(--edge); box-shadow:0 3px 0 var(--goldsh), 0 6px 14px rgba(185,101,12,.25); }
   #deco .now::before { content:"지금 할 차례"; position:absolute; right:36px; top:12px; padding:2px 8px; border-radius:999px; background:var(--bark); color:#fff3dc; font-size:11px; font-weight:800; }
   #deco > div.now::before { right:12px; }
@@ -221,6 +222,7 @@
   #ifind button { padding:0 16px 0 13px; }
   #intro .two { display:grid; grid-template-columns:1fr 1.25fr; gap:8px; }
   #intro .two button { padding:0 8px; }
+  @media (orientation:landscape) and (max-height:500px) { #intro > div { width:min(760px,100%); } #intro ul { grid-template-columns:1fr 1fr; } #intro > div { padding:12px 16px; } #intro .hero { margin-bottom:6px; } #intro .hero img { width:52px; height:52px; } #intro li { padding:6px 10px; } } /* 가로 화면: 설명을 두 줄로 놓아 아래 버튼까지 한 화면에 */
   #ifrom { margin:0 0 10px; padding:10px 12px; border-radius:var(--r-sm); background:linear-gradient(180deg,#fff1c4,#ffe08a); border:1px solid rgba(185,101,12,.3); font-size:14px; font-weight:800; text-align:center; word-break:keep-all; }
 
   /* ── 산책 ── */
@@ -371,7 +373,21 @@
   #medal { cursor:pointer; }
   /* 마을 화면 배치(11-17, 사용자가 보낸 휴대폰 게임 화면처럼): 위 왼쪽 = 마을 배지·진행 / 위 오른쪽 = 재화 한 줄(먹이·코인) /
      오른쪽 가장자리 = 아이콘+이름 세로 줄(알 받기·상점·뽑기·미션·찾기·설정·익룡) / 왼쪽 아래 = 할 일 한 줄 + 족장 공지 / 맨 아래 = 큰 아이콘 메뉴 */
+  #bagmsg .grow { display:block; margin-top:6px; line-height:1.5; } #bagmsg .grow .chip { margin-left:6px; padding:3px 10px; font-size:12px; } /* 성장 단계 줄(11-17) */
+  #news .picks { margin:6px 0 0; font-size:12px; } #news .picks button { all:unset; padding:0 3px; color:var(--gold); font:inherit; font-weight:800; text-decoration:underline dotted; cursor:pointer; } /* 우가가 뽑은 집(11-17) */
+  #racebox .rrow { display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; padding:10px 12px; border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(255,255,255,.04); }
+  #racebox .rrow b { flex:1 1 100%; font-size:14px; } #racebox .rrow span { flex:1 1 auto; font-size:12px; color:var(--ink2); } #racebox select { min-width:0; flex:1 1 120px; padding:6px; border-radius:8px; }
+  #racebar { position:fixed; top:calc(70px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); z-index:3; width:min(360px,calc(100vw - 24px)); padding:10px 40px 10px 14px; }
+  #racebar b { display:block; font-family:var(--head); font-size:17px; } #racebar ol { margin:6px 0 0; padding-left:18px; font-size:13px; } #racebar .x { position:absolute; top:8px; right:8px; }
+  body.intro #evbar, body.intro #toast { display:none !important; } /* 첫 안내 카드 위에는 행사 알림을 띄우지 않는다 */
+  body.racing #news, body.racing #next, body.racing #side, body.racing #menu, body.racing #evbar { display:none !important; } /* 경주 중계 중에는 화면을 비운다(릴스 녹화) */
+  #paybox { margin:8px 0 12px; padding:12px; border-radius:14px; border:1px solid rgba(255,194,63,.6); background:linear-gradient(135deg,rgba(255,194,63,.16),rgba(255,255,255,.02)); display:grid; gap:8px; } #paybox .note { margin:0; font-size:11.5px; } #paybox summary { cursor:pointer; font-size:12px; color:var(--gold); }
+  #payd { width:min(480px,calc(100vw - 24px)); background:#fff; color:#222; } #payd h2 { color:#222; } /* 토스 결제창은 흰 바탕에서 읽기 쉽다 */
+  .setlinks { margin-top:14px; } .setlinks a, .linkb { all:unset; cursor:pointer; color:var(--ink2); text-decoration:underline; font-size:12px; } /* 설정 아래 작은 링크(11-17 스토어 앱) */
+  #baginv > .note, #shoplist > .note { grid-column:1 / -1; } /* 빈 가방 안내가 좁은 칸에 끼지 않게 */
+  @media (orientation:landscape) and (max-height:500px) { #sheet { width:min(420px,calc(100vw - 16px)); } } /* 가로 화면: 오른쪽 위 먹이·코인과 안 겹치게 */
   #tr { gap:6px; } #tr .cur { display:flex; gap:6px; align-items:center; }
+  @media (max-width:420px) { #tr .cur { flex-direction:column; align-items:flex-end; } } /* 좁은 휴대폰: 먹이·코인을 세로로 쌓아 마을 이름판과 안 겹치게 */
   #tr .cur .mini { min-height:36px; padding:0 10px 0 8px; font-size:12px; gap:5px; } #tr .cur .mini::before { width:17px; height:17px; }
   #hud { max-width:calc(100vw - 222px); } #hud > div { overflow:hidden; } #hud h1, #hud p { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   #coinp { --ic:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2'><circle cx='12' cy='12' r='8.5'/><path d='M14.6 9.3a3.3 3.3 0 1 0 0 5.4'/></svg>"); }
@@ -462,6 +478,9 @@
   .icell small { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; }
   .icell, .icell .itile { width:100%; }
   .equip { display:grid; grid-template-columns:64px 1fr 64px; grid-template-rows:64px 64px; gap:8px 10px; align-items:center; justify-items:center; margin:2px 0 10px; }
+  .decorow { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:10px; } .decorow > b { grid-column:1 / -1; font-size:13px; }
+  .dslot { display:grid; justify-items:center; gap:2px; padding:6px 2px; min-height:64px; border-radius:12px; border:1px dashed var(--line); background:rgba(255,255,255,.03); color:var(--ink2); font-size:11px; }
+  .dslot.on { border-style:solid; border-color:var(--gold2); color:var(--ink); } .dslot img { width:36px; height:36px; } .dslot i { width:36px; height:36px; } /* 집 꾸미기 칸(11-17) */
   .equip #bagdino { grid-column:2; grid-row:1 / 3; } .equip .bagpic { width:min(150px,38vw); margin:0; }
   .eslot { position:relative; width:64px; height:64px; padding:0; border-radius:14px; background:rgba(0,0,0,.35); border:2px dashed rgba(255,255,255,.18); box-shadow:none; color:#7f7a6c; font-size:12px; }
   .eslot.r0 { border:2px solid #6d776a; } .eslot.r1 { border:2px solid #4fa8ff; } .eslot.r2 { border:2px solid #ff9a2e; box-shadow:0 0 10px rgba(255,154,46,.35); }
@@ -605,6 +624,7 @@
     <button id="cwalk" class="ghost ic" hidden>산책</button>
     <button id="cnest" class="ghost ic" hidden></button>
     <button id="ccare" class="ghost ic" hidden></button>
+    <button id="clike" class="ghost ic" hidden>멋져요</button>
     <div id="cshare" hidden><button id="cphoto" class="ghost ic">사진</button><button id="cinvite" class="ghost ic">친구 초대</button></div>
     <button id="cpair" class="ghost ic" hidden></button>
     <a id="clink" class="btn ic">인스타</a>
@@ -637,7 +657,10 @@
     <div id="dexbone" class="codex"></div>
   </div>
   <div data-tab="spot">
-    <h2>명소 미션</h2>
+    <h2>공룡 달리기</h2>
+    <p>매일 저녁 8시, 마을 서쪽 경기장에서 한 판. 알도 굴러서 뛰어요.</p>
+    <div id="racebox" class="list"></div>
+    <h2 class="gap">명소 미션</h2>
     <p>누르면 산책을 시작하고, 화살표가 그곳까지 길을 알려 줘요.</p>
     <div id="spotmis" class="list"></div>
     <h2 class="gap">명소</h2>
@@ -678,6 +701,7 @@
     <h2 id="bagh">내 공룡</h2>
     <p id="bagmsg" class="note"></p>
     <div id="baggear" class="equip"><div id="bagdino"></div></div>
+    <div id="bagdeco" class="decorow"></div>
     <div id="bagstat" class="stats"></div>
     <div id="bagtabs" class="chips"></div>
     <div id="baginv" class="igrid"></div>
@@ -685,6 +709,7 @@
   </div>
   <div data-tab="shop">
     <div class="shophead"><h2>상점</h2><span id="shopcoin" class="coinbig"></span></div>
+    <div id="paybox" hidden></div>
     <div id="shoptabs" class="chips"></div>
     <div id="shopdeal"></div>
     <div id="shoplist" class="sgrid"></div>
@@ -717,6 +742,8 @@
   <button data-tab="spot">명소</button>
   <button data-tab="era">시대</button>
 </nav>
+
+<div id="racebar" class="box" hidden><b id="rline"></b><ol id="rtop"></ol><button id="rx" class="x">닫기</button></div>
 
 <div id="walkui" hidden>
   <p id="walkhint" class="box"></p>
@@ -810,6 +837,7 @@
   <div class="seg"><button id="sl">왼쪽</button><button id="sr">오른쪽</button></div>
   <p class="note">마을 소리 (물소리·바람·모닥불)</p>
   <div class="seg"><button id="son">켜기</button><button id="soff">끄기</button></div>
+  <p class="note setlinks"><a href="./privacy.html" target="_blank" rel="noopener">개인정보처리방침</a> · <button id="delacc" class="linkb" hidden>계정 삭제</button></p>
 </dialog>
 
 <dialog id="duel" class="box">
@@ -832,6 +860,7 @@
   <div id="itacts" class="end"></div>
 </dialog>
 
+<dialog id="payd" class="box"><button class="x" id="payx">닫기</button><h2>황금 알 뽑기</h2><p id="payname"></p><div id="paymeth"></div><div id="payagree"></div><button id="paygo" class="wide">결제하기</button></dialog>
 <dialog id="award" class="box">
   <button class="x" id="awx">닫기</button>
   <h2>먹이 순위 정해졌다! 우가</h2>
@@ -850,6 +879,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=a97d5c46"></script>
+<script type="module" src="./app.js?v=9c47ac71"></script>
 </body>
 </html>
