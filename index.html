@@ -445,6 +445,9 @@
   #zregg.c1::before, #zregg.c2::before, #zregg.c2::after { opacity:.9; } #zregg.hot { animation:zshake .14s ease-in-out infinite; } #zregg.gold { background:radial-gradient(circle at 34% 28%,#fffd,transparent 38%), var(--gc); box-shadow:inset -10px -14px 0 rgba(0,0,0,.2), 0 0 70px var(--gc), 0 0 140px var(--gc); }
   #zrev.open #zregg { animation:zpop .45s forwards; }
   @keyframes zshake { 0%,100% { transform:rotate(-7deg); } 50% { transform:rotate(7deg) translateY(-3px); } } @keyframes zpop { 40% { transform:scale(1.3); } to { transform:scale(2.6); opacity:0; } }
+  #zrimg { position:absolute; z-index:2; width:56%; opacity:0; transform:scale(.3) rotate(-12deg); transition:opacity .4s, transform .65s cubic-bezier(.2,1.7,.4,1); } #zrev.open #zrimg { opacity:1; transform:none; animation:float 2.4s .7s ease-in-out infinite; } #zrimg .itile { width:100%; box-shadow:0 0 30px var(--gc), inset 0 -6px 12px rgba(0,0,0,.45); border-color:var(--gc); }
+  @keyframes float { 50% { transform:translateY(-8px); } }
+  #zregg[data-k=gift] { background:radial-gradient(circle at 34% 28%,#fffc,transparent 36%), linear-gradient(90deg, transparent 44%, #d8322a 44% 56%, transparent 56%), linear-gradient(0deg, transparent 47%, #d8322a 47% 57%, transparent 57%), #e8c25a; } /* 리본 두른 선물 알 */
   #zrflash { position:fixed; inset:0; z-index:30; pointer-events:none; background:#fff; opacity:0; } #zrflash.on { animation:zflash .7s ease-out; } @keyframes zflash { 0% { opacity:0; } 12% { opacity:.95; } 100% { opacity:0; } }
   #zrburst { position:absolute; inset:0; z-index:4; pointer-events:none; } #zrburst i { position:absolute; left:50%; top:45%; width:9px; height:14px; border-radius:2px; background:var(--c); animation:zconf 1.6s cubic-bezier(.15,.6,.3,1) forwards; }
   @keyframes zconf { from { transform:translate(-50%,-50%) rotate(0); opacity:1; } to { transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)); opacity:0; } }
@@ -938,7 +941,7 @@
   <button id="rok" hidden>받기</button>
 </dialog>
 
-<dialog id="zrev" class="box"><div id="zrstage"><i id="zrrays"></i><canvas id="zrpic" width="560" height="560"></canvas><i id="zregg"></i><div id="zrburst"></div><span id="zrgrade"></span><span id="zrnew" hidden>NEW!</span></div><b id="zrname"></b><p id="zrsub"></p><p id="zrlore" class="note"></p><div id="zrfacts" class="zfacts"></div><div id="zrbtns"><button id="zrmore" class="ghost" hidden></button><button id="zrok">우리에 넣기</button></div></dialog>
+<dialog id="zrev" class="box"><div id="zrstage"><i id="zrrays"></i><canvas id="zrpic" width="560" height="560"></canvas><div id="zrimg" hidden></div><i id="zregg"></i><div id="zrburst"></div><span id="zrgrade"></span><span id="zrnew" hidden>NEW!</span></div><b id="zrname"></b><p id="zrsub"></p><p id="zrlore" class="note"></p><div id="zrfacts" class="zfacts"></div><div id="zrbtns"><button id="zrmore" class="ghost" hidden></button><button id="zrok">우리에 넣기</button></div></dialog>
 <div id="zrflash"></div>
 <div id="guide" class="box" hidden><img id="gface" alt="대족장 우가"><b>대족장 우가</b><p id="gtext"></p><div class="gb"><small id="gstep"></small><button id="gskip" class="ghost">건너뛰기</button><button id="gnext">다음</button></div></div>
 <div id="gring" hidden></div><div id="garrow" hidden>👇</div>
@@ -968,6 +971,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=e1919e15"></script>
+<script type="module" src="./app.js?v=b8876993"></script>
 </body>
 </html>
