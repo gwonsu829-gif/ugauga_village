@@ -418,15 +418,59 @@
   .zegg { display:grid; grid-template-columns:64px 1fr; gap:4px 12px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:16px; border:2px solid var(--ec); background:linear-gradient(135deg,color-mix(in srgb,var(--ec) 28%,transparent),rgba(255,255,255,.02)); }
   .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
   .zegg b { font-family:var(--head); font-weight:400; font-size:16px; } .zegg small { font-size:11.5px; color:var(--ink2); line-height:1.35; } .zegg button { min-height:40px; }
+  /* 알 무늬(11-22): 부화장 카드 알과 깨기 화면 알이 같은 무늬 */
+  :is(.e-leaf i, #zregg[data-k=leaf]) { background:radial-gradient(circle at 34% 28%,#fffb,transparent 36%), radial-gradient(ellipse 18% 9% at 62% 46%,#2f7a2a 98%,transparent), radial-gradient(ellipse 14% 7% at 36% 66%,#2f7a2a 98%,transparent), radial-gradient(ellipse 12% 6% at 66% 76%,#2f7a2a 98%,transparent), #5fbf5a; }
+  :is(.e-meat i, #zregg[data-k=meat]) { background:radial-gradient(circle at 34% 28%,#fffb,transparent 36%), linear-gradient(115deg, transparent 52%, #5a120a 53% 55%, transparent 56% 59%, #5a120a 60% 62%, transparent 63% 66%, #5a120a 67% 69%, transparent 70%), #c8402a; }
+  :is(.e-hybrid i, #zregg[data-k=hybrid]) { background:radial-gradient(circle at 34% 28%,#fffb,transparent 36%), linear-gradient(100deg, #ff7ad9 0 49%, #3a1f3a 49% 51%, #5ad8ff 51%); }
+  :is(.e-unique i, #zregg[data-k=unique]) { background:radial-gradient(circle at 34% 28%,#fffd,transparent 36%), conic-gradient(from var(--ua,0deg), #ff6b6b, #ffd36a, #78ffe6, #8f7aff, #ff7ad9, #ff6b6b); animation:uni 3s linear infinite; }
+  @property --ua { syntax:'<angle>'; inherits:false; initial-value:0deg; } @keyframes uni { to { --ua:360deg; } }
+  :is(.e-myth i, #zregg[data-k=myth]) { background:radial-gradient(circle at 34% 28%,#fff8,transparent 34%), radial-gradient(1.5px 1.5px at 30% 60%,#fff,transparent), radial-gradient(1.5px 1.5px at 62% 34%,#fff,transparent), radial-gradient(2px 2px at 70% 70%,#ffd36a,transparent), radial-gradient(1.5px 1.5px at 44% 82%,#fff,transparent), radial-gradient(circle at 50% 60%,#3a2a7a,#120c2a 70%); box-shadow:inset -10px -12px 0 rgba(0,0,0,.3), 0 0 22px #ffd36a, 0 0 44px #8f7aff; }
+  .zegg.e-myth { border-color:#ffd36a; box-shadow:0 0 18px rgba(255,211,106,.35); } .zegg.e-unique { border-image:linear-gradient(90deg,#ff6b6b,#ffd36a,#78ffe6,#8f7aff) 1; }
+  #zregg[data-k=unique] { animation:zshake .6s ease-in-out infinite, uni 3s linear infinite; } #zregg[data-k=unique].hot { animation:zshake .14s ease-in-out infinite, uni 1s linear infinite; } #zregg[data-k=myth].hot { animation:zshake .14s ease-in-out infinite; }
   .zbank { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; margin:6px 0 8px; border-radius:14px; background:rgba(255,211,106,.1); border:1px solid rgba(255,211,106,.45); }
   .zbank b { font-size:15px; } .zbank small { display:block; font-size:11.5px; color:var(--ink2); }
   .zodds { width:100%; border-collapse:collapse; font-size:11.5px; margin:4px 0 10px; } .zodds td { padding:3px 4px; border-bottom:1px solid var(--line); } .zodds td:last-child { text-align:right; font-weight:900; }
-  #zrev { text-align:center; width:min(380px,calc(100vw - 24px)); overflow:hidden; }
-  #zrstage { position:relative; display:grid; place-items:center; } #zrpic { width:100%; aspect-ratio:1; opacity:0; transition:opacity .5s; } #zrev.open #zrpic { opacity:1; }
-  #zregg { position:absolute; width:110px; height:140px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff9,transparent 40%), var(--ec,#b9a07a); box-shadow:inset -10px -12px 0 rgba(0,0,0,.25), 0 0 40px var(--ec,#b9a07a); animation:zshake .35s ease-in-out infinite; }
-  #zrev.open #zregg { animation:zpop .5s forwards; }
-  @keyframes zshake { 0%,100% { transform:rotate(-8deg); } 50% { transform:rotate(8deg); } } @keyframes zpop { to { transform:scale(2.4); opacity:0; } }
-  #zrname { display:block; font-family:var(--head); font-weight:400; font-size:22px; margin-top:4px; } #zrsub { margin:4px 0; font-weight:900; } #zrok { width:100%; margin-top:8px; }
+  /* 11-22 알 깨기 연출 2차(사용자 "뽑기·UI 모션·디테일 고도화"): 어두운 무대 → 알이 흔들리며 금이 간다 → 등급 확정 빛(전설 이상은 알이 미리 물든다) → 번쩍 → 등급색 빛살이 돌고 3D 공룡이 회전하며 등장 → 등급 도장·1/N·신규 딱지·꽃가루 */
+  #zrev { text-align:center; width:min(400px,calc(100vw - 20px)); overflow:hidden; padding:16px 16px 14px; background:radial-gradient(circle at 50% 30%, color-mix(in srgb,var(--gc,#ffd36a) 22%,#15201a), #0d140f 70%); border-color:color-mix(in srgb,var(--gc,#ffd36a) 60%,transparent); transition:background .6s, border-color .6s; }
+  #zrev::backdrop { background:rgba(5,8,6,.82); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); }
+  #zrev.quake { animation:zquake .5s; } @keyframes zquake { 10%,50%,90% { transform:translate(-6px,3px); } 30%,70% { transform:translate(6px,-3px); } }
+  #zrstage { position:relative; display:grid; place-items:center; aspect-ratio:1; }
+  #zrpic { position:relative; z-index:2; width:100%; aspect-ratio:1; opacity:0; transform:scale(.6); transition:opacity .45s, transform .6s cubic-bezier(.2,1.6,.4,1); } #zrev.open #zrpic { opacity:1; transform:none; }
+  #zrrays { position:absolute; inset:-30%; z-index:1; opacity:0; background:repeating-conic-gradient(from 0deg, color-mix(in srgb,var(--gc,#fff) 70%,transparent) 0 7deg, transparent 7deg 22deg); -webkit-mask:radial-gradient(circle, #000 18%, transparent 62%); mask:radial-gradient(circle, #000 18%, transparent 62%); animation:zspin 9s linear infinite; transition:opacity .5s; }
+  #zrev.open #zrrays { opacity:.75; } #zrev.g5 #zrrays { background:repeating-conic-gradient(from 0deg, #ff6b6b 0 6deg, #ffd36a 6deg 12deg, #78ffe6 12deg 18deg, #8f7aff 18deg 24deg, transparent 24deg 34deg); }
+  @keyframes zspin { to { transform:rotate(360deg); } }
+  #zregg { position:absolute; z-index:3; width:120px; height:152px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 34% 28%,#fffb,transparent 38%), radial-gradient(circle at 70% 80%,rgba(0,0,0,.18),transparent 50%), var(--ec,#b9a07a); box-shadow:inset -10px -14px 0 rgba(0,0,0,.22), 0 0 34px var(--ec,#b9a07a); animation:zshake .6s ease-in-out infinite; transition:background .5s, box-shadow .5s; overflow:hidden; }
+  #zregg::before, #zregg::after { content:""; position:absolute; inset:0; opacity:0; transition:opacity .25s; background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 152'><polyline points='8,58 24,50 32,62 46,44 56,58 66,40 78,56 90,46 100,60 114,52' fill='none' stroke='%231a1008' stroke-width='3.2' stroke-linejoin='bevel'/><polyline points='46,44 44,30 50,22' fill='none' stroke='%231a1008' stroke-width='2.2'/></svg>") center/100% 100% no-repeat; } /* 지그재그로 갈라지는 금 */
+  #zregg::after { background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 152'><polyline points='66,40 70,26 62,14' fill='none' stroke='%231a1008' stroke-width='2.4'/><polyline points='32,62 28,78 36,90' fill='none' stroke='%231a1008' stroke-width='2.2'/><polyline points='90,46 96,70 88,84' fill='none' stroke='%231a1008' stroke-width='2.2'/><polygon points='50,22 62,14 70,26 66,40 56,58 46,44' fill='%23fff6c8' opacity='.85'/></svg>"); } /* 더 갈라지고 틈 사이로 빛 */
+  #zregg.c1::before, #zregg.c2::before, #zregg.c2::after { opacity:.9; } #zregg.hot { animation:zshake .14s ease-in-out infinite; } #zregg.gold { background:radial-gradient(circle at 34% 28%,#fffd,transparent 38%), var(--gc); box-shadow:inset -10px -14px 0 rgba(0,0,0,.2), 0 0 70px var(--gc), 0 0 140px var(--gc); }
+  #zrev.open #zregg { animation:zpop .45s forwards; }
+  @keyframes zshake { 0%,100% { transform:rotate(-7deg); } 50% { transform:rotate(7deg) translateY(-3px); } } @keyframes zpop { 40% { transform:scale(1.3); } to { transform:scale(2.6); opacity:0; } }
+  #zrflash { position:fixed; inset:0; z-index:30; pointer-events:none; background:#fff; opacity:0; } #zrflash.on { animation:zflash .7s ease-out; } @keyframes zflash { 0% { opacity:0; } 12% { opacity:.95; } 100% { opacity:0; } }
+  #zrburst { position:absolute; inset:0; z-index:4; pointer-events:none; } #zrburst i { position:absolute; left:50%; top:45%; width:9px; height:14px; border-radius:2px; background:var(--c); animation:zconf 1.6s cubic-bezier(.15,.6,.3,1) forwards; }
+  @keyframes zconf { from { transform:translate(-50%,-50%) rotate(0); opacity:1; } to { transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)); opacity:0; } }
+  #zrgrade { position:absolute; z-index:5; left:50%; bottom:6%; transform:translateX(-50%) scale(0); padding:4px 16px; border-radius:999px; font-family:var(--head); font-size:20px; color:#14100a; background:var(--gc); box-shadow:0 0 24px var(--gc), 0 4px 0 rgba(0,0,0,.35); white-space:nowrap; }
+  #zrev.open #zrgrade { animation:zstamp .5s .25s cubic-bezier(.2,1.8,.4,1) forwards; } @keyframes zstamp { from { transform:translateX(-50%) scale(2.6) rotate(-8deg); opacity:0; } to { transform:translateX(-50%) scale(1) rotate(-3deg); opacity:1; } }
+  #zrnew { position:absolute; z-index:5; right:4%; top:6%; padding:3px 10px; border-radius:8px; font-weight:900; font-size:13px; color:#fff; background:#ff4d3a; box-shadow:0 3px 0 #a3241a; transform:rotate(10deg) scale(0); }
+  #zrev.open #zrnew:not([hidden]) { animation:znew .45s .55s cubic-bezier(.2,1.8,.4,1) forwards; } @keyframes znew { to { transform:rotate(10deg) scale(1); } }
+  #zrname { display:block; font-family:var(--head); font-weight:400; font-size:24px; margin-top:6px; text-shadow:0 0 18px color-mix(in srgb,var(--gc,#fff) 60%,transparent); }
+  #zrev.open #zrname, #zrev.open #zrsub, #zrev.open #zrlore, #zrev.open #zrfacts { animation:zup .45s both; } #zrev.open #zrsub { animation-delay:.08s; } #zrev.open #zrlore { animation-delay:.16s; } #zrev.open #zrfacts { animation-delay:.24s; }
+  @keyframes zup { from { opacity:0; transform:translateY(12px); } }
+  #zrsub { margin:4px 0; font-weight:900; } #zrbtns { display:flex; gap:8px; margin-top:10px; } #zrbtns button { flex:1; min-height:46px; } #zrmore { white-space:nowrap; }
+  /* 화면 모션(11-22): 아래 창은 스프링으로 올라오고, 칩·카드·버튼이 살짝 튄다 */
+  #sheet:not([hidden]) { animation:sheetup .38s cubic-bezier(.2,1.25,.4,1); } @keyframes sheetup { from { transform:translateY(40px); opacity:0; } }
+  .chip { transition:transform .15s, background .2s, color .2s; } .chip.on { animation:chipon .3s cubic-bezier(.2,1.8,.4,1); } @keyframes chipon { 50% { transform:scale(1.12); } }
+  .zcard, .zegg, .zup, .scard { animation:zup .4s both; animation-delay:calc(var(--i,0) * 45ms); } .zcard { transition:transform .15s; } .zcard:active { transform:scale(.96); }
+  #side > button { transition:transform .15s; } #side > button:hover { transform:translateY(-2px) scale(1.04); } #side > button:active { transform:scale(.92); }
+  .zegg button, #zrbtns button:last-child { position:relative; overflow:hidden; } .zegg button::after, #zrbtns button:last-child::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 35%, rgba(255,255,255,.55) 50%, transparent 65%); transform:translateX(-120%); animation:shine 2.6s ease-in-out infinite; } @keyframes shine { 60%,100% { transform:translateX(120%); } }
+  .cnt { display:inline-block; } .cnt.up { animation:cntup .5s; } @keyframes cntup { 30% { transform:scale(1.25); color:#ffe08a; } }
+  #toast p { animation:toastin .35s cubic-bezier(.2,1.5,.4,1); } @keyframes toastin { from { transform:translateY(-14px) scale(.9); opacity:0; } }
+  /* 대족장 우가 첫 안내(11-22) */
+  #guide { position:fixed; z-index:25; left:50%; bottom:calc(96px + var(--sb, 0px)); transform:translateX(-50%); width:min(440px,calc(100vw - 20px)); display:grid; grid-template-columns:76px 1fr; gap:4px 12px; align-items:center; padding:12px 14px; animation:sheetup .4s cubic-bezier(.2,1.25,.4,1); }
+  #guide img { grid-row:1 / 4; width:76px; height:76px; border-radius:50%; background:radial-gradient(circle at 50% 40%,#ffe9b0,#c98a2a); border:3px solid var(--gold); box-shadow:0 0 0 3px #3a2208, 0 6px 14px rgba(0,0,0,.4); animation:talk .5s ease-in-out infinite alternate; } @keyframes talk { to { transform:translateY(-3px) rotate(-2deg); } }
+  #guide b { font-family:var(--head); font-weight:400; font-size:14px; color:var(--gold); } #guide p { margin:0; font-size:14.5px; line-height:1.45; font-weight:700; word-break:keep-all; min-height:2.9em; }
+  #guide .gb { display:flex; gap:6px; justify-content:flex-end; } #guide .gb button { min-height:36px; padding:0 14px; font-size:13px; } #guide .gb .ghost { opacity:.75; } #guide small { font-size:11px; color:var(--ink2); margin-right:auto; align-self:center; }
+  #gring { position:fixed; z-index:24; pointer-events:none; border-radius:18px; box-shadow:0 0 0 4px #ffd36a, 0 0 0 9999px rgba(5,8,6,.55), 0 0 24px 6px #ffd36a; transition:all .45s cubic-bezier(.2,1.2,.4,1); animation:gring 1.1s ease-in-out infinite; } @keyframes gring { 50% { box-shadow:0 0 0 7px #ffd36a, 0 0 0 9999px rgba(5,8,6,.55), 0 0 34px 10px #ffd36a; } }
+  #garrow { position:fixed; z-index:26; pointer-events:none; font-size:34px; filter:drop-shadow(0 3px 2px rgba(0,0,0,.5)); animation:gbob .7s ease-in-out infinite alternate; transition:left .45s, top .45s; } @keyframes gbob { to { transform:translateY(-10px); } }
   .zfacts { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:8px 0 0; text-align:left; } .zfacts div { padding:6px 8px; border-radius:10px; background:rgba(255,255,255,.05); border:1px solid var(--line); font-size:12px; } .zfacts div b { display:block; font-size:10.5px; color:var(--ink2); font-weight:700; }
   .zfacts .st { grid-column:1 / -1; display:grid; grid-template-columns:42px 1fr 28px; gap:6px; align-items:center; } .zfacts .st i { height:8px; border-radius:4px; background:rgba(255,255,255,.1); overflow:hidden; } .zfacts .st i u { display:block; height:100%; background:linear-gradient(90deg,var(--gc,#ffd36a),#fff8); }
   #zrev.open #zregg.skip, #zregg.skip { display:none; }
@@ -747,7 +791,7 @@
     <div id="shoptabs" class="chips"></div>
     <div id="shopdeal"></div>
     <div id="shoplist" class="sgrid"></div>
-    <p class="note">코인은 출석(하루 10)·미션 보물 상자(30)·대결로 모여요. 진짜 돈으로 사는 것은 없어요.</p>
+    <p class="note">코인은 공룡 우리 수입(제일 많이, 공룡 3마리까지는 2배)·첫 출석 300·매일 출석 10·미션 보물 상자 60·하루 무료 뽑기·공룡 달리기(1등 100)·동네 대항전·대결·금요일 경매로 모여요. 진짜 돈으로 사는 것은 없어요.</p>
   </div>
   <div data-tab="zoo">
     <div class="shophead"><h2>부족 공룡 우리</h2><span id="zcoin" class="coinbig"></span></div>
@@ -894,7 +938,10 @@
   <button id="rok" hidden>받기</button>
 </dialog>
 
-<dialog id="zrev" class="box"><div id="zrstage"><canvas id="zrpic" width="440" height="440"></canvas><i id="zregg"></i></div><b id="zrname"></b><p id="zrsub"></p><p id="zrlore" class="note"></p><div id="zrfacts" class="zfacts"></div><button id="zrok">우리에 넣기</button></dialog>
+<dialog id="zrev" class="box"><div id="zrstage"><i id="zrrays"></i><canvas id="zrpic" width="560" height="560"></canvas><i id="zregg"></i><div id="zrburst"></div><span id="zrgrade"></span><span id="zrnew" hidden>NEW!</span></div><b id="zrname"></b><p id="zrsub"></p><p id="zrlore" class="note"></p><div id="zrfacts" class="zfacts"></div><div id="zrbtns"><button id="zrmore" class="ghost" hidden></button><button id="zrok">우리에 넣기</button></div></dialog>
+<div id="zrflash"></div>
+<div id="guide" class="box" hidden><img id="gface" alt="대족장 우가"><b>대족장 우가</b><p id="gtext"></p><div class="gb"><small id="gstep"></small><button id="gskip" class="ghost">건너뛰기</button><button id="gnext">다음</button></div></div>
+<div id="gring" hidden></div><div id="garrow" hidden>👇</div>
 <dialog id="itemd" class="box">
   <button class="x" id="itx">닫기</button>
   <div class="ithead"><div id="itpic" class="itile"></div><div><b id="itname"></b><p id="itsub"></p></div></div>
@@ -921,6 +968,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=31adb6a2"></script>
+<script type="module" src="./app.js?v=635d9031"></script>
 </body>
 </html>
