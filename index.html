@@ -404,7 +404,38 @@
   #news { top:auto !important; bottom:calc(88px + var(--sb)); max-width:calc(100vw - 92px); }
   #evbar { bottom:auto; top:calc(98px + env(safe-area-inset-top,0px)); } /* 시계·접속자 줄 아래 */
   /* 그림 아이콘(11-17 "아이콘이 대충 만든 느낌 → 공룡 시대 디자인으로 힉스필드로"): ui/*.webp(투명 배경, 128px). 선 아이콘(마스크) 대신 그림을 그대로 깐다 */
-  :is(#shopb,#drawb,#qbtn,#side [data-tab=find],#snd,#ride,#join,#menu [data-tab=dex],#menu [data-tab=bag],#myegg,#menu [data-tab=spot],#menu [data-tab=era],#purse,#coinp,#chatb,#setb,#errand,#walkend,#cwalk,#cfeed)::before {
+  #zoob { --img:url(./ui/pet.webp); }
+  .zcards { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:8px 0 10px; }
+  .zcard { position:relative; display:grid; gap:3px; justify-items:center; text-align:center; padding:8px 6px 8px; border-radius:16px; background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02)); border:2px solid var(--gc,#777); box-shadow:0 0 0 rgba(0,0,0,0); }
+  .zcard.g3, .zcard.g4, .zcard.g5 { box-shadow:0 0 14px var(--gc); } .zcard.g5 { animation:zglow 2.2s ease-in-out infinite; }
+  @keyframes zglow { 50% { box-shadow:0 0 26px var(--gc); } }
+  .zcard canvas { width:100%; aspect-ratio:1; border-radius:12px; background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.16),rgba(0,0,0,.25) 70%); }
+  .zcard b { font-family:var(--head); font-weight:400; font-size:13.5px; line-height:1.2; } .zcard small { font-size:11px; color:var(--ink2); }
+  .zcard .gtag { position:absolute; top:6px; left:6px; padding:2px 7px; border-radius:999px; font-size:10.5px; font-weight:900; color:#14100a; background:var(--gc); }
+  .zcard .wtag { position:absolute; top:6px; right:6px; padding:2px 7px; border-radius:999px; font-size:10.5px; font-weight:900; background:#ffd36a; color:#3a2208; }
+  .zcard .acts { display:flex; gap:4px; width:100%; } .zcard .acts button { flex:1; min-height:34px; font-size:12.5px; padding:0 4px; }
+  .zcard.pick { outline:3px solid #ffd36a; }
+  .zegg { display:grid; grid-template-columns:64px 1fr; gap:4px 12px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:16px; border:2px solid var(--ec); background:linear-gradient(135deg,color-mix(in srgb,var(--ec) 28%,transparent),rgba(255,255,255,.02)); }
+  .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
+  .zegg b { font-family:var(--head); font-weight:400; font-size:16px; } .zegg small { font-size:11.5px; color:var(--ink2); line-height:1.35; } .zegg button { min-height:40px; }
+  .zbank { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; margin:6px 0 8px; border-radius:14px; background:rgba(255,211,106,.1); border:1px solid rgba(255,211,106,.45); }
+  .zbank b { font-size:15px; } .zbank small { display:block; font-size:11.5px; color:var(--ink2); }
+  .zodds { width:100%; border-collapse:collapse; font-size:11.5px; margin:4px 0 10px; } .zodds td { padding:3px 4px; border-bottom:1px solid var(--line); } .zodds td:last-child { text-align:right; font-weight:900; }
+  #zrev { text-align:center; width:min(380px,calc(100vw - 24px)); overflow:hidden; }
+  #zrstage { position:relative; display:grid; place-items:center; } #zrpic { width:100%; aspect-ratio:1; opacity:0; transition:opacity .5s; } #zrev.open #zrpic { opacity:1; }
+  #zregg { position:absolute; width:110px; height:140px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff9,transparent 40%), var(--ec,#b9a07a); box-shadow:inset -10px -12px 0 rgba(0,0,0,.25), 0 0 40px var(--ec,#b9a07a); animation:zshake .35s ease-in-out infinite; }
+  #zrev.open #zregg { animation:zpop .5s forwards; }
+  @keyframes zshake { 0%,100% { transform:rotate(-8deg); } 50% { transform:rotate(8deg); } } @keyframes zpop { to { transform:scale(2.4); opacity:0; } }
+  #zrname { display:block; font-family:var(--head); font-weight:400; font-size:22px; margin-top:4px; } #zrsub { margin:4px 0; font-weight:900; } #zrok { width:100%; margin-top:8px; }
+  .zfacts { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:8px 0 0; text-align:left; } .zfacts div { padding:6px 8px; border-radius:10px; background:rgba(255,255,255,.05); border:1px solid var(--line); font-size:12px; } .zfacts div b { display:block; font-size:10.5px; color:var(--ink2); font-weight:700; }
+  .zfacts .st { grid-column:1 / -1; display:grid; grid-template-columns:42px 1fr 28px; gap:6px; align-items:center; } .zfacts .st i { height:8px; border-radius:4px; background:rgba(255,255,255,.1); overflow:hidden; } .zfacts .st i u { display:block; height:100%; background:linear-gradient(90deg,var(--gc,#ffd36a),#fff8); }
+  #zrev.open #zregg.skip, #zregg.skip { display:none; }
+  .zup { display:grid; gap:4px; padding:12px; margin-bottom:10px; border-radius:16px; background:linear-gradient(135deg,rgba(255,194,63,.16),rgba(255,255,255,.02)); border:2px solid rgba(255,194,63,.55); }
+  .zup b { font-family:var(--head); font-weight:400; font-size:17px; } .zup small { font-size:12px; color:var(--ink2); } .zup .nx { color:#ffd36a; } .zup button { min-height:42px; margin-top:4px; }
+  .zlv { display:flex; gap:5px; } .zlv i { flex:1; height:8px; border-radius:4px; background:rgba(255,255,255,.12); } .zlv i.on { background:linear-gradient(90deg,#ffd36a,#ff9a2e); box-shadow:0 0 6px #ffb43a; }
+  .zdex { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; } .zdex div { display:grid; gap:2px; justify-items:center; padding:6px 2px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid var(--line); font-size:10.5px; text-align:center; line-height:1.2; }
+  .zdex canvas { width:100%; aspect-ratio:1; } .zdex div.no canvas { filter:brightness(0) opacity(.55); } .zdex div.no { color:var(--ink2); }
+  :is(#zoob,#shopb,#drawb,#qbtn,#side [data-tab=find],#snd,#ride,#join,#menu [data-tab=dex],#menu [data-tab=bag],#myegg,#menu [data-tab=spot],#menu [data-tab=era],#purse,#coinp,#chatb,#setb,#errand,#walkend,#cwalk,#cfeed)::before {
     -webkit-mask:none !important; mask:none !important; background:var(--img) center/contain no-repeat !important; filter:drop-shadow(0 2px 2px rgba(0,0,0,.45)); }
   #shopb { --img:url(./ui/shop.webp); } #drawb { --img:url(./ui/draw.webp); } #qbtn { --img:url(./ui/mission.webp); } #side [data-tab=find] { --img:url(./ui/search.webp); }
   #snd, #setb { --img:url(./ui/settings.webp); } #ride { --img:url(./ui/ride.webp); } #join { --img:url(./ui/join.webp); }
@@ -610,6 +641,7 @@
 <div id="side">
   <button id="join" class="ic">알 받기</button>
   <button id="shopb" class="mini ic" data-go="shop">상점</button>
+  <button id="zoob" class="mini ic">공룡 우리</button>
   <button id="drawb" class="mini ic">뽑기</button>
   <button id="qbtn" class="mini ic" hidden>오늘 미션</button>
   <button data-tab="find" class="mini ic">찾기</button>
@@ -717,6 +749,13 @@
     <div id="shoplist" class="sgrid"></div>
     <p class="note">코인은 출석(하루 10)·미션 보물 상자(30)·대결로 모여요. 진짜 돈으로 사는 것은 없어요.</p>
   </div>
+  <div data-tab="zoo">
+    <div class="shophead"><h2>부족 공룡 우리</h2><span id="zcoin" class="coinbig"></span></div>
+    <p id="zmsg" class="note"></p>
+    <div id="zbank"></div>
+    <div id="ztabs" class="chips"></div>
+    <div id="zbody"></div>
+  </div>
   <div data-tab="shell">
     <h2>먹이</h2>
     <p><b id="shn"></b> 먹이를 주면 내 알이 커지고, 마을에 온 모든 사람에게 그 크기로 보여요. 많이 먹은 알에서는 남다른 아기 공룡이 나와요.</p>
@@ -773,7 +812,7 @@
       <li><b>집</b>내 아이디가 새겨진 집 한 채가 생겨요</li>
       <li><b>알</b>집 옆 둥지에 공룡 알이 놓여요. 무엇이 나올지는 아이디마다 달라요</li>
       <li><b>시대</b>팔로워가 늘면 마을 전체가 다음 시대로 넘어가요. 알이 깨고, 아기 공룡이 자라요</li>
-      <li><b>먹이</b>산책하며 먹이를 주워 내 알에게 주면 알이 커져요. 5,000개를 먹은 알은 마을보다 먼저 깨고, 아주 많이 먹으면 7배까지 커요</li>
+      <li><b>먹이</b>산책하며 먹이를 주워 내 알에게 주면 알이 커져요. 2,000개를 먹은 알은 마을보다 먼저 깨고(깨기 전엔 먹인 먹이가 2배), 아주 많이 먹으면 7배까지 커요</li>
     </ul>
     <p id="ifrom" hidden></p>
     <p id="istat"></p>
@@ -855,6 +894,7 @@
   <button id="rok" hidden>받기</button>
 </dialog>
 
+<dialog id="zrev" class="box"><div id="zrstage"><canvas id="zrpic" width="440" height="440"></canvas><i id="zregg"></i></div><b id="zrname"></b><p id="zrsub"></p><p id="zrlore" class="note"></p><div id="zrfacts" class="zfacts"></div><button id="zrok">우리에 넣기</button></dialog>
 <dialog id="itemd" class="box">
   <button class="x" id="itx">닫기</button>
   <div class="ithead"><div id="itpic" class="itile"></div><div><b id="itname"></b><p id="itsub"></p></div></div>
@@ -881,6 +921,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=5daa4fc1"></script>
+<script type="module" src="./app.js?v=bd5b7941"></script>
 </body>
 </html>
