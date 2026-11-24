@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>우가우가마을</title>
+<link rel="icon" href="./ui/myegg.webp"><link rel="apple-touch-icon" href="./ui/myegg.webp">
 <meta name="description" content="댓글 한 줄이면 원시시대 마을에 내 집 한 채와 공룡 알 하나가 생겨요.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Black+Han+Sans&display=swap">
@@ -417,7 +418,8 @@
   .zcard.pick { outline:3px solid #ffd36a; }
   .zegg { display:grid; grid-template-columns:64px 1fr; gap:4px 12px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:16px; border:2px solid var(--ec); background:linear-gradient(135deg,color-mix(in srgb,var(--ec) 28%,transparent),rgba(255,255,255,.02)); }
   .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
-  .zegg b { font-family:var(--head); font-weight:400; font-size:16px; } .zegg small { font-size:11.5px; color:var(--ink2); line-height:1.35; } .zegg button { min-height:40px; }
+  .zpity { display:grid; gap:2px; padding:10px 14px; margin-bottom:10px; border-radius:14px; border:2px solid #ffd36a; background:rgba(255,211,106,.1); } .zpity b { font-family:var(--head); font-weight:400; font-size:15px; color:#ffd36a; } .zpity small { font-size:11.5px; color:var(--ink2); } .zpity i { display:block; height:8px; margin-top:6px; border-radius:8px; background:linear-gradient(90deg,#ffd36a var(--p),rgba(255,255,255,.12) var(--p)); }
+  .zegg b { font-family:var(--head); font-weight:400; font-size:16px; } .zegg small { font-size:11.5px; color:var(--ink2); line-height:1.35; } .zegg button { min-height:40px;  grid-column:1 / -1; } /* 11-24: 64px 칸에 갇혀 '첫 알은 공짜! 깨기'가 세로로 깨지던 것 → 카드 폭 전체 */
   /* 알 무늬(11-22): 부화장 카드 알과 깨기 화면 알이 같은 무늬 */
   :is(.e-leaf i, #zregg[data-k=leaf]) { background:radial-gradient(circle at 34% 28%,#fffb,transparent 36%), radial-gradient(ellipse 18% 9% at 62% 46%,#2f7a2a 98%,transparent), radial-gradient(ellipse 14% 7% at 36% 66%,#2f7a2a 98%,transparent), radial-gradient(ellipse 12% 6% at 66% 76%,#2f7a2a 98%,transparent), #5fbf5a; }
   :is(.e-meat i, #zregg[data-k=meat]) { background:radial-gradient(circle at 34% 28%,#fffb,transparent 36%), linear-gradient(115deg, transparent 52%, #5a120a 53% 55%, transparent 56% 59%, #5a120a 60% 62%, transparent 63% 66%, #5a120a 67% 69%, transparent 70%), #c8402a; }
@@ -448,6 +450,13 @@
   #zrimg { position:absolute; z-index:2; width:56%; opacity:0; transform:scale(.3) rotate(-12deg); transition:opacity .4s, transform .65s cubic-bezier(.2,1.7,.4,1); } #zrev.open #zrimg { opacity:1; transform:none; animation:float 2.4s .7s ease-in-out infinite; } #zrimg .itile { width:100%; box-shadow:0 0 30px var(--gc), inset 0 -6px 12px rgba(0,0,0,.45); border-color:var(--gc); }
   @keyframes float { 50% { transform:translateY(-8px); } }
   #zregg[data-k=gift] { background:radial-gradient(circle at 34% 28%,#fffc,transparent 36%), linear-gradient(90deg, transparent 44%, #d8322a 44% 56%, transparent 56%), linear-gradient(0deg, transparent 47%, #d8322a 47% 57%, transparent 57%), #e8c25a; } /* 리본 두른 선물 알 */
+  /* 11-22 알 그림(힉스필드 D, ui/eggs/egg_종류.webp): 코드로 칠한 알 대신. 빛은 그림 모양 그대로 따라 번지게(drop-shadow) */
+  .zegg i.img, #zregg.img { background-color:transparent !important; background-size:contain !important; background-repeat:no-repeat !important; background-position:center !important; border-radius:0 !important; box-shadow:none !important; }
+  .zegg i.img { width:64px; height:78px; filter:drop-shadow(0 4px 6px rgba(0,0,0,.45)) drop-shadow(0 0 10px var(--ec)); transition:transform .2s; } .zegg:hover i.img { transform:scale(1.08) rotate(-4deg); }
+  .zegg.e-myth i.img, .zegg.e-unique i.img { animation:eggbob 2.2s ease-in-out infinite; } @keyframes eggbob { 50% { transform:translateY(-4px) rotate(3deg); } }
+  #zregg.img { width:170px; height:200px; overflow:visible; filter:drop-shadow(0 8px 10px rgba(0,0,0,.5)) drop-shadow(0 0 22px var(--ec)); }
+  #zregg.img.gold { filter:drop-shadow(0 0 26px var(--gc)) drop-shadow(0 0 60px var(--gc)) brightness(1.15) saturate(1.2); }
+  #zregg.img::before, #zregg.img::after { inset:6% 10%; }
   #zrflash { position:fixed; inset:0; z-index:30; pointer-events:none; background:#fff; opacity:0; } #zrflash.on { animation:zflash .7s ease-out; } @keyframes zflash { 0% { opacity:0; } 12% { opacity:.95; } 100% { opacity:0; } }
   #zrburst { position:absolute; inset:0; z-index:4; pointer-events:none; } #zrburst i { position:absolute; left:50%; top:45%; width:9px; height:14px; border-radius:2px; background:var(--c); animation:zconf 1.6s cubic-bezier(.15,.6,.3,1) forwards; }
   @keyframes zconf { from { transform:translate(-50%,-50%) rotate(0); opacity:1; } to { transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)); opacity:0; } }
@@ -463,6 +472,7 @@
   #sheet:not([hidden]) { animation:sheetup .38s cubic-bezier(.2,1.25,.4,1); } @keyframes sheetup { from { transform:translateY(40px); opacity:0; } }
   .chip { transition:transform .15s, background .2s, color .2s; } .chip.on { animation:chipon .3s cubic-bezier(.2,1.8,.4,1); } @keyframes chipon { 50% { transform:scale(1.12); } }
   .zcard, .zegg, .zup, .scard { animation:zup .4s both; animation-delay:calc(var(--i,0) * 45ms); } .zcard { transition:transform .15s; } .zcard:active { transform:scale(.96); }
+  @media (max-width:430px) { #side { gap:6px; } #side > button { width:52px; min-height:52px; font-size:10px; border-radius:14px; } #side > button::before { width:27px !important; height:27px !important; } } /* 11-24: 휴대폰에서 오른쪽 버튼 줄이 화면을 덜 가리게 */
   #side > button { transition:transform .15s; } #side > button:hover { transform:translateY(-2px) scale(1.04); } #side > button:active { transform:scale(.92); }
   .zegg button, #zrbtns button:last-child { position:relative; overflow:hidden; } .zegg button::after, #zrbtns button:last-child::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 35%, rgba(255,255,255,.55) 50%, transparent 65%); transform:translateX(-120%); animation:shine 2.6s ease-in-out infinite; } @keyframes shine { 60%,100% { transform:translateX(120%); } }
   .cnt { display:inline-block; } .cnt.up { animation:cntup .5s; } @keyframes cntup { 30% { transform:scale(1.25); color:#ffe08a; } }
@@ -652,6 +662,7 @@
   #photo img { display:block; width:100%; max-height:56vh; object-fit:contain; border-radius:16px; margin-bottom:10px; background:#e9dcc3; box-shadow:0 6px 18px rgba(43,29,16,.2); }
   @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
+
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -971,6 +982,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=b8876993"></script>
+<script type="module" src="./app.js?v=c9efd11d"></script>
 </body>
 </html>
