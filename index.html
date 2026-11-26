@@ -438,8 +438,9 @@
   .dpop.crit { font-size:38px; color:#ffd34a; } .dpop.skill { color:#8fe0ff; } .dpop.other { font-size:18px; opacity:.85; } .dpop.hurt { color:#ff6a5a; } .dpop.dodge { color:#8affb0; font-size:24px; }
   #bossbar { position:fixed; z-index:13; top:calc(64px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); padding:8px 10px 8px 16px; border-radius:16px; background:linear-gradient(90deg,#5a120a,#a3290e); color:#fff3e0; border:2px solid #ff9a3a; box-shadow:0 0 24px rgba(255,90,20,.55); display:flex; gap:10px; align-items:center; font-size:13px; white-space:nowrap; max-width:calc(100vw - 20px); animation:bossglow 1.6s ease-in-out infinite; }
   #bossbar[hidden], #boss[hidden], #bwarn[hidden], #arhud[hidden] { display:none; }
-  #bossbar b { font-family:var(--head); font-weight:400; color:#ffd34a; } #bossbar button { min-height:34px; padding:0 12px; font-size:13px; } @keyframes bossglow { 50% { box-shadow:0 0 40px rgba(255,90,20,.9); } }
-  @media (max-width:430px) { #bossbar { font-size:11.5px; } }
+  #bossbar b { font-family:var(--head); font-weight:400; color:#ffd34a; } #bossbar em { font-style:normal; font-weight:800; color:#fff; background:rgba(0,0,0,.3); padding:2px 8px; border-radius:999px; } #bossbar button { min-height:34px; padding:0 12px; font-size:13px; } @keyframes bossglow { 50% { box-shadow:0 0 40px rgba(255,90,20,.9); } }
+  @media (max-width:600px) { #bossbar { font-size:11.5px; top:calc(78px + env(safe-area-inset-top,0px)); } } /* 휴대폰: 오른쪽 위 먹이·시계 아래로(겹치지 않게) */
+  body.walking #bossbar { top:auto; bottom:calc(186px + var(--sb,0px)); } body.walking #bossbar span { display:none; } @media (max-height:520px) { body.walking #bossbar { bottom:calc(14px + var(--sb,0px)); } } /* 가로 화면: 조이스틱과 산책 끝 사이 */ /* 산책 중엔 위쪽 안내문과 안 겹치게 조이스틱 위로 */
   #boss { position:fixed; z-index:15; left:0; right:0; margin:0 auto; bottom:calc(14px + var(--sb,0px)); width:min(480px,calc(100vw - 16px)); display:grid; gap:8px; } /* transform을 쓰면 안쪽 position:fixed(보스 HP 띠)가 이 상자 기준이 된다 */
   body.bossing :is(#menu,#next,#news) { display:none !important; }
   #boss .bh { position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); width:min(560px,calc(100vw - 16px)); padding:8px 12px; border-radius:14px; background:rgba(20,8,6,.85); border:2px solid #ff6a2a; color:#ffe9c8; display:grid; grid-template-columns:1fr auto; gap:4px; }
@@ -920,7 +921,7 @@
 <dialog id="annc" class="box"><img src="./ui/boss.webp" alt="멸망의 용암 군주" width="720" height="450">
   <span class="tag">새 소식 · 보스전</span><h2>멸망의 용암 군주가 깨어났다!</h2>
   <p id="anwhen"></p>
-  <ul><li>3시간마다 15분 동안 화산 들판에 나타나요 (0·3·6·9·12·15·18·21시)</li><li>주민들이 함께 때려야 쓰러져요. 빨간 예고가 뜨면 <b>피하기</b></li><li>많이 때린 만큼 코인, 그리고 보스전에서만 얻는 울트라 공룡</li></ul>
+  <ul><li>3시간마다 30분 동안 화산 들판에 나타나요 (0·3·6·9·12·15·18·21시)</li><li>주민들이 함께 때려야 쓰러져요. 빨간 예고가 뜨면 <b>피하기</b></li><li>많이 때린 만큼 코인, 그리고 보스전에서만 얻는 울트라 공룡</li></ul>
   <div class="end"><button class="ghost" id="anx">닫기</button><button id="ango">보스전 가기</button></div></dialog>
 <dialog id="how" class="box">
   <h2>알 받는 법</h2>
@@ -977,7 +978,7 @@
 </dialog>
 
 <canvas id="arena" hidden></canvas><div id="arhud" hidden></div><div id="pops"></div>
-<div id="bossbar" hidden><b>보스 출현!</b> 멸망의 용암 군주가 화산 들판에 나타났다 <button id="bossgo">보스전 가기</button></div>
+<div id="bossbar" hidden><b>보스 출현!</b> <span>멸망의 용암 군주</span> <em id="bossleft"></em> <button id="bossgo">보스전 가기</button></div>
 <div id="boss" hidden><div class="bh"><b>멸망의 용암 군주</b><span id="bhpt"></span><i><u id="bhp"></u></i></div><div id="btop"></div>
   <div class="bm"><span id="bmet"></span><i><u id="bme"></u></i></div>
   <div id="bbtn"><button data-k="0">물기</button><button data-k="1">강타</button><button data-k="2">공룡 스킬</button><button class="dodge">피하기</button></div></div>
@@ -1025,6 +1026,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=20217020"></script>
+<script type="module" src="./app.js?v=463743f8"></script>
 </body>
 </html>
