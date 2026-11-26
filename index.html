@@ -111,6 +111,8 @@
   #news { background:rgba(16,22,18,.5); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); border-color:rgba(242,177,52,.25); box-shadow:0 6px 18px rgba(0,0,0,.25); padding-right:38px; position:fixed; }
   #news::after { color:var(--gold); }
   #news .nx { position:absolute; top:6px; right:6px; width:26px; min-height:26px; height:26px; padding:0; border-radius:50%; font-size:0; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); box-shadow:none; }
+  #news .nx::after { content:""; position:absolute; inset:-9px; } /* 11-26 검수: 손가락으로 누르는 범위를 44px로(보이는 크기는 그대로) */
+  #news .picks button { position:relative; } #news .picks button::after { content:""; position:absolute; inset:-12px -4px; }
   #news .nx::before { content:""; width:11px; height:11px; background:var(--ink2); -webkit-mask:var(--ix) center/contain no-repeat; mask:var(--ix) center/contain no-repeat; }
   @media (max-width:600px) { /* 휴대폰: 족장 소식은 한 줄로 접어 두고, 누르면 펼친다(마을이 가려지지 않게) */
     #news:not(.open) { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -419,6 +421,30 @@
   .zegg { display:grid; grid-template-columns:64px 1fr; gap:4px 12px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:16px; border:2px solid var(--ec); background:linear-gradient(135deg,color-mix(in srgb,var(--ec) 28%,transparent),rgba(255,255,255,.02)); }
   .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
   .zpity { display:grid; gap:2px; padding:10px 14px; margin-bottom:10px; border-radius:14px; border:2px solid #ffd36a; background:rgba(255,211,106,.1); } .zpity b { font-family:var(--head); font-weight:400; font-size:15px; color:#ffd36a; } .zpity small { font-size:11.5px; color:var(--ink2); } .zpity i { display:block; height:8px; margin-top:6px; border-radius:8px; background:linear-gradient(90deg,#ffd36a var(--p),rgba(255,255,255,.12) var(--p)); }
+  /* 11-26 대결 무대·보스전 */
+  #arena { position:fixed; inset:0; width:100vw; height:100vh; z-index:14; display:block; } #arena[hidden] { display:none; }
+  body.arena :is(#hud,#news,#tr,#side,#menu,#next,#stick,#walkhint,#saybox,#guide,#gring,#garrow,#bossbar) { display:none !important; }
+  #arhud { position:fixed; z-index:16; top:calc(12px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); width:min(560px,calc(100vw - 20px)); display:grid; grid-template-columns:1fr 1fr; gap:10px; pointer-events:none; }
+  .arb { padding:8px 10px; border-radius:14px; background:rgba(16,12,10,.78); border:2px solid #c88a1e; color:#f6ecd8; } .arb.B { text-align:right; }
+  .arb b { display:block; font-size:13px; } .arb small { font-size:11px; color:#c2b49a; } .arb i { display:block; height:12px; margin-top:4px; border-radius:8px; background:#3a2a20; overflow:hidden; } .arb.B i { transform:scaleX(-1); }
+  .arb u { display:block; height:100%; background:linear-gradient(90deg,#4ad06a,#b8f06a); transition:width .35s cubic-bezier(.2,1.4,.4,1); }
+  #pops { position:fixed; inset:0; z-index:30; pointer-events:none; } .dpop { position:fixed; left:0; top:0; font:900 26px var(--head,sans-serif); color:#fff; -webkit-text-stroke:2px #3a1a0a; text-shadow:0 3px 0 #3a1a0a; white-space:nowrap; will-change:transform; }
+  .dpop.crit { font-size:38px; color:#ffd34a; } .dpop.skill { color:#8fe0ff; } .dpop.other { font-size:18px; opacity:.85; } .dpop.hurt { color:#ff6a5a; } .dpop.dodge { color:#8affb0; font-size:24px; }
+  #bossbar { position:fixed; z-index:13; top:calc(64px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); padding:8px 10px 8px 16px; border-radius:16px; background:linear-gradient(90deg,#5a120a,#a3290e); color:#fff3e0; border:2px solid #ff9a3a; box-shadow:0 0 24px rgba(255,90,20,.55); display:flex; gap:10px; align-items:center; font-size:13px; white-space:nowrap; max-width:calc(100vw - 20px); animation:bossglow 1.6s ease-in-out infinite; }
+  #bossbar[hidden], #boss[hidden], #bwarn[hidden], #arhud[hidden] { display:none; }
+  #bossbar b { font-family:var(--head); font-weight:400; color:#ffd34a; } #bossbar button { min-height:34px; padding:0 12px; font-size:13px; } @keyframes bossglow { 50% { box-shadow:0 0 40px rgba(255,90,20,.9); } }
+  @media (max-width:430px) { #bossbar { font-size:11.5px; } }
+  #boss { position:fixed; z-index:15; left:0; right:0; margin:0 auto; bottom:calc(14px + var(--sb,0px)); width:min(480px,calc(100vw - 16px)); display:grid; gap:8px; } /* transform을 쓰면 안쪽 position:fixed(보스 HP 띠)가 이 상자 기준이 된다 */
+  body.bossing :is(#menu,#next,#news) { display:none !important; }
+  #boss .bh { position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); width:min(560px,calc(100vw - 16px)); padding:8px 12px; border-radius:14px; background:rgba(20,8,6,.85); border:2px solid #ff6a2a; color:#ffe9c8; display:grid; grid-template-columns:1fr auto; gap:4px; }
+  #boss .bh b { font-family:var(--head); font-weight:400; color:#ffb46a; } #boss .bh span { font-size:12px; } #boss .bh i { grid-column:1 / -1; height:16px; border-radius:9px; background:#3a1208; overflow:hidden; }
+  #boss .bh u { display:block; height:100%; background:linear-gradient(90deg,#ff3a1a,#ffb02a); transition:width .25s; } #btop { position:fixed; top:calc(84px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); font-size:11.5px; color:#ffe9c8; text-shadow:0 1px 3px #000; white-space:nowrap; }
+  #boss .bm { padding:6px 10px; border-radius:12px; background:rgba(16,22,18,.85); color:#f6ecd8; font-size:12px; } #boss .bm i { display:block; height:8px; margin-top:4px; border-radius:6px; background:#2a3a2e; overflow:hidden; } #boss .bm u { display:block; height:100%; background:#4ad06a; transition:width .3s; }
+  #bbtn { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; } #bbtn button { position:relative; overflow:hidden; min-height:58px; font-size:14px; }
+  #bbtn button::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,.55); transform-origin:bottom; transform:scaleY(calc(var(--cd,0%) / 100%)); pointer-events:none; }
+  #bbtn .dodge { background:linear-gradient(180deg,#8affb0,#2ab86a); color:#0a2a14; } #bbtn .dodge.hot { animation:dodgeHot .4s ease-in-out infinite alternate; } @keyframes dodgeHot { to { transform:scale(1.08); box-shadow:0 0 22px #8affb0; } }
+  #bwarn { position:fixed; z-index:16; top:38%; left:50%; transform:translate(-50%,-50%); padding:12px 20px; border-radius:16px; background:rgba(160,20,10,.9); color:#fff; font:400 20px var(--head,sans-serif); border:3px solid #ffd34a; animation:warnPulse .35s ease-in-out infinite alternate; white-space:nowrap; }
+  @keyframes warnPulse { to { transform:translate(-50%,-50%) scale(1.06); } }
   .zegg b { font-family:var(--head); font-weight:400; font-size:16px; } .zegg small { font-size:11.5px; color:var(--ink2); line-height:1.35; } .zegg button { min-height:40px;  grid-column:1 / -1; } /* 11-24: 64px 칸에 갇혀 '첫 알은 공짜! 깨기'가 세로로 깨지던 것 → 카드 폭 전체 */
   /* 알 무늬(11-22): 부화장 카드 알과 깨기 화면 알이 같은 무늬 */
   :is(.e-leaf i, #zregg[data-k=leaf]) { background:radial-gradient(circle at 34% 28%,#fffb,transparent 36%), radial-gradient(ellipse 18% 9% at 62% 46%,#2f7a2a 98%,transparent), radial-gradient(ellipse 14% 7% at 36% 66%,#2f7a2a 98%,transparent), radial-gradient(ellipse 12% 6% at 66% 76%,#2f7a2a 98%,transparent), #5fbf5a; }
@@ -939,6 +965,12 @@
   <p class="note setlinks"><a href="./privacy.html" target="_blank" rel="noopener">개인정보처리방침</a> · <button id="delacc" class="linkb" hidden>계정 삭제</button></p>
 </dialog>
 
+<canvas id="arena" hidden></canvas><div id="arhud" hidden></div><div id="pops"></div>
+<div id="bossbar" hidden><b>보스 출현!</b> 멸망의 용암 군주가 화산 들판에 나타났다 <button id="bossgo">보스전 가기</button></div>
+<div id="boss" hidden><div class="bh"><b>멸망의 용암 군주</b><span id="bhpt"></span><i><u id="bhp"></u></i></div><div id="btop"></div>
+  <div class="bm"><span id="bmet"></span><i><u id="bme"></u></i></div>
+  <div id="bbtn"><button data-k="0">물기</button><button data-k="1">강타</button><button data-k="2">공룡 스킬</button><button class="dodge">피하기</button></div></div>
+<div id="bwarn" hidden></div>
 <dialog id="duel" class="box">
   <button class="x" id="dux">닫기</button>
   <h2 id="duh">공룡 대결</h2>
@@ -982,6 +1014,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=826bd3e8"></script>
+<script type="module" src="./app.js?v=46df0bd5"></script>
 </body>
 </html>
