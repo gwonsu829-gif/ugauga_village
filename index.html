@@ -422,6 +422,10 @@
   .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
   .zshard { border-color:#ff6a2a; background:rgba(255,90,26,.12); } .zshard b { color:#ffb46a !important; } .zshard i { background:linear-gradient(90deg,#ff5a1a var(--p),rgba(255,255,255,.12) var(--p)) !important; } .zshard button { margin-top:6px; }
   .zpity { display:grid; gap:2px; padding:10px 14px; margin-bottom:10px; border-radius:14px; border:2px solid #ffd36a; background:rgba(255,211,106,.1); } .zpity b { font-family:var(--head); font-weight:400; font-size:15px; color:#ffd36a; } .zpity small { font-size:11.5px; color:var(--ink2); } .zpity i { display:block; height:8px; margin-top:6px; border-radius:8px; background:linear-gradient(90deg,#ffd36a var(--p),rgba(255,255,255,.12) var(--p)); }
+  /* 11-28 부족 의뢰 */
+  .qr { display:grid; grid-template-columns:1fr auto; gap:4px 10px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:14px; border:2px solid var(--line); background:rgba(255,255,255,.04); }
+  .qr b { font-size:14px; word-break:keep-all; } .qr small { grid-column:1; font-size:11.5px; color:var(--ink2); } .qr i { grid-column:1 / -1; display:block; height:8px; border-radius:6px; background:rgba(255,255,255,.1); overflow:hidden; } .qr i u { display:block; height:100%; background:linear-gradient(90deg,#4ad06a,#b8f06a); }
+  .qr.done { border-color:var(--gold); background:rgba(255,197,61,.12); } .qr .acts { grid-row:1 / 3; grid-column:2; display:flex; flex-direction:column; gap:6px; } .qr button { min-height:40px; padding:0 12px; font-size:13px; } .qr button.ghost { min-height:32px; font-size:11.5px; }
   /* 11-26 첫 화면 공지: 보스전 */
   #annc { width:min(420px,calc(100vw - 24px)); padding:0 0 16px; overflow:hidden; border:2px solid #ff7a2a; box-shadow:0 0 40px rgba(255,90,20,.45), 0 20px 50px rgba(0,0,0,.5); }
   #annc img { display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; } #annc .tag { display:inline-block; margin:14px 18px 0; padding:3px 10px; border-radius:999px; background:#a3290e; color:#ffe9c8; font-size:12px; font-weight:800; }
@@ -696,6 +700,7 @@
   #photo img { display:block; width:100%; max-height:56vh; object-fit:contain; border-radius:16px; margin-bottom:10px; background:#e9dcc3; box-shadow:0 6px 18px rgba(43,29,16,.2); }
   @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
+
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -801,6 +806,7 @@
     <div id="hoodlist" class="hoods"></div>
   </div>
   <div data-tab="quest">
+    <h2>부족 의뢰</h2><p class="note" id="qrn"></p><div id="qreq"></div>
     <h2>오늘 미션</h2>
     <p class="note" id="qsn"></p>
     <div id="qstreak" class="dots"></div>
@@ -1026,6 +1032,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=72988195"></script>
+<script type="module" src="./app.js?v=93088fc7"></script>
 </body>
 </html>
