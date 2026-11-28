@@ -14,13 +14,26 @@
   @font-face { font-family:"Cafe24Ssurround"; src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff") format("woff"); font-weight:normal; font-display:swap; }
   /* ── 디자인 체계: 색·글꼴·모서리·그림자·눌림을 한곳에서 정한다 ── */
   :root {
-    /* 11-16 밤 전면 개편: 공룡 탐험 게임 느낌의 어두운 유리 판 + 호박색 테두리·버튼(사용자 "쥬라기 월드 같은 게임처럼, 싼티 나지 않게") */
-    --ink:#f6ecd8; --ink2:#c2b49a; --paper:#18211b; --paper2:#222d25; --line:rgba(242,177,52,.18); --edge:#c88a1e;
-    --gold:#ffc23f; --gold2:#ef8f12; --goldsh:#8a4a06; --cream:#2a372e; --creamsh:#0b100d; --bark:#3a2a1c; --barksh:#140d07; --red:#e2553b;
-    --r-lg:18px; --r-md:14px; --r-sm:10px;
-    --lift:0 14px 34px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.35);
-    --hl:inset 0 1px 0 rgba(255,255,255,.09);
-    --glass:linear-gradient(180deg,rgba(38,50,41,.94),rgba(17,23,19,.95));
+    /* Warm stone, smoked wood and restrained amber. Layout tokens remain compatible. */
+    --ink:#f7eedc; --ink2:#cec1a8; --paper:#18211c; --paper2:#29352c;
+    --line:rgba(232,202,144,.18); --edge:#bc8c39;
+    --gold:#f8c65b; --gold2:#e9a02b; --goldsh:#80521c;
+    --cream:#303e33; --creamsh:#0c130f; --bark:#433023; --barksh:#20150e; --red:#ed795f;
+    --r-lg:22px; --r-md:14px; --r-sm:10px; --r-pill:999px;
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+    --text-xs:11px; --text-sm:13px; --text-md:15px; --text-title:22px;
+    --body:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --border-soft:rgba(232,202,144,.24); --border-bright:rgba(248,198,91,.55);
+    --lift:0 16px 36px rgba(3,9,5,.36),0 3px 8px rgba(3,9,5,.24);
+    --shadow-hud:0 6px 18px rgba(3,9,5,.28),0 1px 3px rgba(3,9,5,.24);
+    --hl:inset 0 1px 0 rgba(255,243,211,.10);
+    --glass:linear-gradient(160deg,rgba(43,55,45,.97),rgba(19,28,23,.97) 72%);
+    --surface-raised:linear-gradient(160deg,rgba(255,239,197,.07),rgba(255,239,197,.02));
+    --button-gold:linear-gradient(180deg,#ffe4a0 0%,var(--gold) 48%,var(--gold2) 100%);
+    --shadow-button:0 3px 0 var(--goldsh),0 6px 12px rgba(3,9,5,.26),inset 0 1px 0 rgba(255,255,255,.5);
+    --shadow-pressed:0 1px 0 var(--goldsh),inset 0 1px 0 rgba(255,255,255,.22);
+    --ease-out:cubic-bezier(.2,.8,.2,1); --ease-spring:cubic-bezier(.22,1.12,.36,1);
+    --motion-press:120ms; --motion-fast:180ms; --motion-panel:320ms;
     --head:"Cafe24Ssurround","Black Han Sans","Jua",Pretendard,"Pretendard Variable","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
     --stone:var(--paper); --sb:env(safe-area-inset-bottom,0px);
     --ix:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'><path d='M6 6l12 12M18 6L6 18'/></svg>");
@@ -494,7 +507,7 @@
   #zregg[data-k=gift] { background:radial-gradient(circle at 34% 28%,#fffc,transparent 36%), linear-gradient(90deg, transparent 44%, #d8322a 44% 56%, transparent 56%), linear-gradient(0deg, transparent 47%, #d8322a 47% 57%, transparent 57%), #e8c25a; } /* 리본 두른 선물 알 */
   /* 11-22 알 그림(힉스필드 D, ui/eggs/egg_종류.webp): 코드로 칠한 알 대신. 빛은 그림 모양 그대로 따라 번지게(drop-shadow) */
   .zegg i.img, #zregg.img { background-color:transparent !important; background-size:contain !important; background-repeat:no-repeat !important; background-position:center !important; border-radius:0 !important; box-shadow:none !important; }
-  .zegg i.img { width:64px; height:78px; filter:drop-shadow(0 4px 6px rgba(0,0,0,.45)) drop-shadow(0 0 10px var(--ec)); transition:transform .2s; } .zegg:hover i.img { transform:scale(1.08) rotate(-4deg); }
+  .zegg i.img { width:64px; height:78px; filter:drop-shadow(0 4px 6px rgba(0,0,0,.45)) drop-shadow(0 0 10px var(--ec)); transition:transform .2s; }
   .zegg.e-myth i.img, .zegg.e-unique i.img { animation:eggbob 2.2s ease-in-out infinite; } @keyframes eggbob { 50% { transform:translateY(-4px) rotate(3deg); } }
   #zregg.img { width:170px; height:200px; overflow:visible; filter:drop-shadow(0 8px 10px rgba(0,0,0,.5)) drop-shadow(0 0 22px var(--ec)); }
   #zregg.img.gold { filter:drop-shadow(0 0 26px var(--gc)) drop-shadow(0 0 60px var(--gc)) brightness(1.15) saturate(1.2); }
@@ -515,7 +528,7 @@
   .chip { transition:transform .15s, background .2s, color .2s; } .chip.on { animation:chipon .3s cubic-bezier(.2,1.8,.4,1); } @keyframes chipon { 50% { transform:scale(1.12); } }
   .zcard, .zegg, .zup, .scard { animation:zup .4s both; animation-delay:calc(var(--i,0) * 45ms); } .zcard { transition:transform .15s; } .zcard:active { transform:scale(.96); }
   @media (max-width:430px) { #side { gap:6px; } #side > button { width:52px; min-height:52px; font-size:10px; border-radius:14px; } #side > button::before { width:27px !important; height:27px !important; } } /* 11-24: 휴대폰에서 오른쪽 버튼 줄이 화면을 덜 가리게 */
-  #side > button { transition:transform .15s; } #side > button:hover { transform:translateY(-2px) scale(1.04); } #side > button:active { transform:scale(.92); }
+  #side > button { transition:transform .15s; } #side > button:active { transform:scale(.92); }
   .zegg button, #zrbtns button:last-child { position:relative; overflow:hidden; } .zegg button::after, #zrbtns button:last-child::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 35%, rgba(255,255,255,.55) 50%, transparent 65%); transform:translateX(-120%); animation:shine 2.6s ease-in-out infinite; } @keyframes shine { 60%,100% { transform:translateX(120%); } }
   .cnt { display:inline-block; } .cnt.up { animation:cntup .5s; } @keyframes cntup { 30% { transform:scale(1.25); color:#ffe08a; } }
   #toast p { animation:toastin .35s cubic-bezier(.2,1.5,.4,1); } @keyframes toastin { from { transform:translateY(-14px) scale(.9); opacity:0; } }
@@ -703,7 +716,187 @@
   #peek h2 { text-align:center; overflow-wrap:anywhere; font-size:19px; }
   #photo img { display:block; width:100%; max-height:56vh; object-fit:contain; border-radius:16px; margin-bottom:10px; background:#e9dcc3; box-shadow:0 6px 18px rgba(43,29,16,.2); }
   @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+
+  /* ── Premium HUD finish: visual overrides only; JS owns visibility and banner placement. ── */
+  html,body { font-family:var(--body); background:var(--paper); }
+  button,.btn,input { font-variant-numeric:tabular-nums; }
+  :is(#hud,#tr,#card,#sheet,#boss,#arhud,.zpity,.qr,.sp,.coinline,.coinbig,.cprice,.cnt,.st,.hood) { font-variant-numeric:tabular-nums; }
+  .box { border-color:var(--border-soft); box-shadow:var(--lift),var(--hl); -webkit-backdrop-filter:none; backdrop-filter:none; }
+  /* Only the sheet and a modal use large blurred surfaces. HUD chips stay inexpensive. */
+  #sheet,dialog.box { -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .mini,#news,#stick,dialog::backdrop,#zrev::backdrop { -webkit-backdrop-filter:none; backdrop-filter:none; }
+  :is(#hud,#menu,#news,#walkhint,#racebar) { background:var(--glass); border-color:var(--border-soft); box-shadow:var(--shadow-hud),var(--hl); }
+  #hud { max-width:calc(100vw - 222px); }
+  #hud h1 { letter-spacing:0; }
+  #hud h1 small { color:var(--ink2); background:rgba(248,198,91,.10); }
+  #hud #medal { border-color:var(--edge); box-shadow:0 0 0 2px rgba(248,198,91,.16),inset 0 1px 2px rgba(255,255,255,.4),inset 0 -2px 0 rgba(107,66,13,.25); }
+  #tr .mini,#clock,#online { border:1px solid var(--border-soft); background:var(--glass); box-shadow:var(--shadow-hud),var(--hl); }
+  #online { color:#a1dba3; }
+  #online::before { background:#80cf88; box-shadow:0 0 0 3px rgba(128,207,136,.13); animation:hud-dot 3s ease-in-out 3; }
+  #tr .cur .mini { min-height:40px; }
+  #side > button { border-color:var(--border-soft); box-shadow:var(--shadow-hud),var(--hl); }
+  #side > #join { background:var(--button-gold); border-color:#ffe4a0; box-shadow:var(--shadow-button); }
+  #menu { border-radius:var(--r-lg); padding:6px; gap:var(--space-1); }
+  #menu button { border:1px solid transparent; border-radius:16px; color:var(--ink2); }
+  #menu button.on { color:#392711; background:var(--button-gold); border-color:#ffe4a0; box-shadow:0 2px 0 var(--goldsh),var(--hl); }
+  #menu #myegg { color:#a4d8a1; }
+  #menu #myegg.on { color:#392711; }
+  #news { border-radius:var(--r-md); line-height:1.55; }
+  #news small { border-top-style:solid; }
+  #news .nx { top:2px; right:2px; width:40px; height:40px; min-height:40px; background:transparent; border:0; }
+  #news .nx::after { inset:0; }
+  #next { animation:none; background:var(--glass); border-color:var(--border-bright); box-shadow:var(--shadow-hud),var(--hl); }
+  #next::after,.zegg button::after,#zrbtns button:last-child::after { animation:none; opacity:0; }
+
+  button,.btn { background:var(--button-gold); box-shadow:var(--shadow-button); border-radius:var(--r-md);
+    transition:transform var(--motion-press) var(--ease-out); }
+  .ghost,.seg button { background:linear-gradient(180deg,#354338,#253229); border-color:var(--border-soft); box-shadow:0 2px 0 var(--creamsh),var(--hl); }
+  .dark { background:linear-gradient(180deg,#684a33,var(--bark)); border-color:rgba(232,202,144,.25); box-shadow:0 2px 0 var(--barksh),var(--hl); }
+  .mini { border-radius:var(--r-pill); background:var(--glass); border-color:var(--border-soft); box-shadow:var(--shadow-hud),var(--hl); }
+  .x { background:rgba(255,239,197,.045); border:1px solid rgba(255,239,197,.08); box-shadow:none; border-radius:50%; }
+  .chip { min-height:40px; border-radius:var(--r-pill); background:rgba(255,239,197,.05); color:var(--ink2); border-color:var(--border-soft); box-shadow:var(--hl); }
+  .chip.on,.seg button.on { background:var(--button-gold); color:#392711; border-color:#ffe4a0; box-shadow:var(--hl); animation:ui-select var(--motion-fast) var(--ease-spring); }
+  .wide { min-height:46px; }
+  :is(button,.btn):active:not(:disabled),#side > button:active,#menu button:active,.chip:active:not(:disabled) { transform:scale(.96); box-shadow:var(--shadow-pressed); }
+  .ghost:active:not(:disabled),.mini:active:not(:disabled),.dark:active:not(:disabled) { box-shadow:inset 0 1px 3px rgba(0,0,0,.24); }
+  .x:active:not(:disabled),#menu button:active { box-shadow:none; }
+  #next:active { transform:scale(.96); }
+  button:disabled { opacity:.55; }
+  :is(button,.btn,input,[tabindex]):focus-visible { outline:2px solid #ffe1a0; outline-offset:3px; }
+  input { border-color:var(--border-soft); background:#141e18; box-shadow:inset 0 2px 4px rgba(0,0,0,.22); }
+  input::placeholder { color:#a29883; }
+  #clog b,#sheet #msg,#intro .sub { color:var(--gold); }
+
+  #sheet { padding:var(--space-5) var(--space-4) var(--space-4); border-radius:var(--r-lg); scrollbar-width:thin; scrollbar-color:rgba(232,202,144,.32) transparent; }
+  #sheet::before { background:rgba(232,202,144,.23); height:3px; }
+  #sheet h2 { font-size:var(--text-title); line-height:1.35; margin-right:36px; overflow-wrap:anywhere; }
+  #sheet > div > p { line-height:1.6; }
+  #bagh { padding-right:12px; }
+  #card { border-radius:var(--r-lg); padding:14px; gap:10px; max-height:calc(100dvh - 110px - var(--sb)); overflow:auto; }
+  #card b { line-height:1.35; }
+  dialog.box { border-radius:var(--r-lg); }
+  dialog::backdrop { background:rgba(5,12,8,.64); }
+  #annc { border:1px solid rgba(255,167,89,.6); box-shadow:var(--lift),var(--hl); max-height:calc(100dvh - 24px); overflow:auto; }
+  #annc h2 { line-height:1.4; }
+  :is(.zpity,.qr,.zup,.zbank,.gearrow,.hood,.drawbox,.scard) { border-radius:var(--r-md); padding:var(--space-3); box-shadow:var(--hl); }
+  .zpity,.qr,.zup { border-width:1px; }
+  .zpity { gap:5px; }
+  .zpity small,.qr small { line-height:1.5; }
+  .qr { grid-template-columns:minmax(0,1fr) auto; }
+  .qr b,.gearrow b { overflow-wrap:anywhere; }
+  .list > *,.scard,.gearrow { background:var(--surface-raised); border-color:var(--line); }
+  .list > button { min-height:44px; }
+  .sp { border-radius:var(--r-sm); min-height:48px; border-color:var(--line); background:rgba(255,239,197,.04); box-shadow:var(--hl); }
+  .sp.can { background:var(--button-gold); border-color:#ffe4a0; }
+  .sp.got { opacity:.55; }
+  .sp:disabled:not(.got) { opacity:.7; filter:none; }
+  .sps { gap:var(--space-1); }
+  .acts .mini,.zcard .acts button,.qr button.ghost,.sbuy,#cform button,#cform input,#guide .gb button { min-height:40px; }
+  #ifrom { color:#392711; }
+
+  #evbar,#evbar.camp,#evbar.boom { border-radius:var(--r-md); box-shadow:var(--shadow-hud),var(--hl); border-color:rgba(255,174,103,.5); }
+  #evbar button { min-height:40px; box-shadow:0 2px 0 var(--goldsh),var(--hl); }
+  #bossbar { border-width:1px; border-radius:var(--r-lg); background:linear-gradient(115deg,#512018,#7c2c18); border-color:rgba(255,174,103,.7); box-shadow:var(--lift),var(--hl),0 0 16px rgba(233,123,46,.12); animation:none; }
+  #bossbar button { min-height:40px; flex-shrink:0; }
+  #bossbar em { font-variant-numeric:tabular-nums; }
+  /* Never transform #boss: its fixed HP strip must stay anchored to the viewport. */
+  #boss .bh,.arb,#boss .bm { border-width:1px; box-shadow:var(--shadow-hud),var(--hl); border-radius:var(--r-md); }
+  #boss .bh { background:linear-gradient(135deg,rgba(42,27,23,.97),rgba(20,18,16,.97)); }
+  #boss .bm { padding:10px 12px; background:var(--glass); border:1px solid var(--border-soft); }
+  #bbtn button { min-width:0; padding:0 8px; box-shadow:var(--shadow-button); }
+  #bbtn .dodge.hot { animation:ui-dodge .8s ease-in-out infinite alternate; }
+  #bwarn { max-width:calc(100vw - 20px); white-space:normal; text-align:center; line-height:1.4; font-size:clamp(16px,4.4vw,20px); border-width:1px; box-shadow:var(--lift),var(--hl); animation:ui-warning .65s ease-in-out infinite alternate; }
+  #btop { max-width:calc(100vw - 24px); overflow:hidden; text-overflow:ellipsis; }
+  :is(.bar,.pbar,.hpb i,.arb i,#boss .bh i,#boss .bm i,.st i,.qr i,.hood i) { background-color:rgba(0,0,0,.28); box-shadow:inset 0 1px 3px rgba(0,0,0,.3); }
+  :is(.bar i,.pbar u,.hpb u,.arb u,#boss .bh u,#boss .bm u,.st u,.qr i u,.hood u,.zfacts .st i u) { transition:width 400ms var(--ease-out); border-radius:inherit; }
+
+  #toast p,#wline { background:linear-gradient(145deg,rgba(51,43,31,.97),rgba(24,28,22,.97)); border:1px solid var(--border-soft); border-radius:var(--r-md); color:var(--ink); box-shadow:var(--shadow-hud),var(--hl); line-height:1.5; }
+  #toast p { padding:10px 16px; animation:ui-toast var(--motion-panel) var(--ease-out); }
+  #wline:not([hidden]) { animation:ui-centered var(--motion-panel) var(--ease-out); }
+  #walkhint:not([hidden]),#chat:not([hidden]) { animation:ui-toast var(--motion-panel) var(--ease-out); }
+  #sheet:not([hidden]) { animation:ui-sheet var(--motion-panel) var(--ease-out); }
+  #card:not([hidden]),#guide:not([hidden]) { animation:ui-card var(--motion-panel) var(--ease-out); }
+  #card { padding:12px 12px 14px; } #card .x { top:6px; right:6px; width:38px; height:38px; min-height:38px; background:transparent; border-color:transparent; } /* 11-29: 카드 꼬리표가 세 줄로 늘던 것 */
+  #sheet > [data-tab]:not([hidden]) { animation:ui-tab 220ms var(--ease-out); }
+  dialog[open],#annc[open] { animation:ui-dialog var(--motion-panel) var(--ease-out); }
+  #mini:not([hidden]) { animation:ui-mini var(--motion-panel) var(--ease-out); }
+  #evbar:not([hidden]),#bossbar:not([hidden]) { animation:ui-centered var(--motion-panel) var(--ease-out); }
+  .dot::after { width:8px; height:8px; background:var(--red); animation:hud-dot 2.8s ease-in-out 3; }
+  #qbtn.hot,.zcard.g5,#guide img,#gring,.zegg.e-myth i.img,.zegg.e-unique i.img { animation:none; }
+  #gring { transition:none; }
+  #garrow { transition:none; }
+  .zcard.g5 { box-shadow:0 0 14px var(--gc); }
+  .zcard,.zegg,.zup,.scard { animation:ui-tab 260ms var(--ease-out) both; animation-delay:calc(min(var(--i,0),4) * 30ms); }
+  .zegg i,.zegg i.img { animation:none; }
+  #wstat { transition:transform var(--motion-fast) var(--ease-out); }
+  #zrev { transition:none; }
+  #zregg { transition:opacity 250ms var(--ease-out),transform 250ms var(--ease-out); }
+  @keyframes ui-sheet { from { opacity:0; transform:translate(-50%,28px); } to { opacity:1; transform:translate(-50%,0); } }
+  @keyframes ui-card { from { opacity:0; transform:translate(-50%,12px) scale(.97); } to { opacity:1; transform:translate(-50%,0) scale(1); } }
+  @keyframes ui-dialog { from { opacity:0; transform:translateY(12px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes ui-mini { from { opacity:0; transform:translate(-50%,-46%) scale(.97); } to { opacity:1; transform:translate(-50%,-50%) scale(1); } }
+  @keyframes ui-toast { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes ui-tab { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes ui-centered { from { opacity:0; transform:translate(-50%,-8px); } to { opacity:1; transform:translate(-50%,0); } }
+  @keyframes ui-select { from { transform:scale(.97); } to { transform:scale(1); } }
+  @keyframes hud-dot { 50% { opacity:.65; transform:scale(.88); } }
+  @keyframes ui-dodge { to { transform:scale(1.025); } }
+  @keyframes ui-warning { to { opacity:.85; } }
+  @media (hover:hover) and (pointer:fine) {
+    button:hover:not(:disabled),.btn:hover { filter:none; transform:translateY(-1px); }
+    #side > button:hover:not(:disabled) { transform:translateY(-2px); }
+    .zegg:hover i.img { transform:scale(1.04) rotate(-2deg); }
+    :is(button,.btn):active:not(:disabled),#side > button:active,#menu button:active { transform:scale(.96); }
+  }
+  @media (hover:none) { #side > button:hover { transform:none; } #side > button:active { transform:scale(.96); } .zegg:hover i.img { transform:none; } }
+  @media (max-width:600px) {
+    #hud { max-width:calc(100vw - 136px); }
+    #bossbar { gap:6px; padding:8px; font-size:11px; }
+    #bossbar > span { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+    #bossbar button { padding:0 10px; font-size:12px; }
+    #bossbar em { padding:3px 6px; }
+  }
+  @media (max-width:370px) {
+    #hud { gap:6px; padding-right:8px; }
+    #hud h1 { font-size:13px; }
+    #hud #medal { width:30px; height:30px; font-size:10px; }
+    #sheet { padding-left:12px; padding-right:12px; }
+    .stats { gap:8px; } .st { grid-template-columns:58px minmax(12px,1fr) 34px; gap:4px; }
+  }
+  @media (orientation:landscape) and (max-height:520px) {
+    #sheet,#card { max-height:calc(100dvh - 110px - var(--sb)); }
+    #guide { bottom:calc(86px + var(--sb)); padding:10px 12px; grid-template-columns:52px minmax(0,1fr); }
+    #guide img { width:52px; height:52px; }
+    #guide p { min-height:0; }
+    #boss { width:min(400px,calc(100vw - 240px)); bottom:10px; gap:6px; }
+    #bbtn { gap:6px; } #bbtn button { min-height:44px; font-size:13px; }
+    #boss .bh { width:min(420px,calc(100vw - 240px)); }
+  }
+
+  /* Small visible badges retain a full finger target without moving the HUD. */
+  #hud #medal { position:relative; }
+  #hud #medal::after { content:""; position:absolute; width:44px; height:44px; left:50%; top:50%; transform:translate(-50%,-50%); }
+  #clog .rep { min-height:40px; min-width:40px; }
+  .setlinks a,.linkb { display:inline-flex; align-items:center; min-height:40px; }
+  .cnt.up { animation:ui-count 400ms var(--ease-out); }
+  @keyframes ui-count { 35% { transform:scale(1.12); } }
+  button,.btn { font-size:var(--text-md); }
+  /* Existing compact controls retain their more specific font sizes. */
+  #sheet .note { font-size:var(--text-sm); }
+  /* Keep rare eggs luminous, with compositor-only movement. */
+  :is(.e-unique i,#zregg[data-k=unique]) { animation:none; }
+  #zregg[data-k=unique] { animation:zshake .6s ease-in-out infinite; }
+  #zregg[data-k=unique].hot { animation:zshake .14s ease-in-out infinite; }
+  #zrev.open #zregg[data-k=unique] { animation:zpop .45s forwards; }
+  @media (prefers-reduced-motion:reduce) {
+    *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    /* Preserve the terminal reveal state when its finishing animation is disabled. */
+    #zrev.open #zregg { opacity:0; pointer-events:none; }
+    #zrev.open #zrgrade { transform:translateX(-50%) rotate(-3deg); }
+    #zrev.open #zrnew:not([hidden]) { transform:rotate(10deg) scale(1); }
+  }
 </style>
+
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -1036,6 +1229,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=c785f9d8"></script>
+<script type="module" src="./app.js?v=ef61efb0"></script>
 </body>
 </html>
