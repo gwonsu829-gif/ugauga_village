@@ -430,6 +430,7 @@
   #annc { width:min(420px,calc(100vw - 24px)); padding:0 0 16px; overflow:hidden; border:2px solid #ff7a2a; box-shadow:0 0 40px rgba(255,90,20,.45), 0 20px 50px rgba(0,0,0,.5); }
   #annc img { display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; } #annc .tag { display:inline-block; margin:14px 18px 0; padding:3px 10px; border-radius:999px; background:#a3290e; color:#ffe9c8; font-size:12px; font-weight:800; }
   #annc h2 { margin:6px 18px 4px; font-size:21px; color:#ffb46a; } #annc p { margin:0 18px 6px; font-weight:800; color:#ffd34a; } #annc ul { margin:4px 18px 12px; padding-left:18px; font-size:13.5px; line-height:1.55; color:var(--ink); word-break:keep-all; }
+  #annc .anday { margin:0 18px 8px; padding:8px 12px; border-radius:12px; background:rgba(255,197,61,.12); border:1px solid rgba(255,197,61,.35); color:var(--ink); font-weight:700; font-size:13px; word-break:keep-all; }
   #annc .end { display:flex; gap:8px; justify-content:flex-end; padding:0 18px; } #annc .end button { min-height:44px; } #ango { background:linear-gradient(180deg,#ffb02a,#ff5a1a); color:#2a0e04; }
   #annc[open] { animation:sheetup .45s cubic-bezier(.2,1.25,.4,1); }
   /* 11-26 대결 무대·보스전 */
@@ -700,7 +701,6 @@
   #photo img { display:block; width:100%; max-height:56vh; object-fit:contain; border-radius:16px; margin-bottom:10px; background:#e9dcc3; box-shadow:0 6px 18px rgba(43,29,16,.2); }
   @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
-
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -806,7 +806,7 @@
     <div id="hoodlist" class="hoods"></div>
   </div>
   <div data-tab="quest">
-    <h2>부족 의뢰</h2><p class="note" id="qrn"></p><div id="qreq"></div>
+    <h2>부족 의뢰</h2><p class="note" id="qrn" style="white-space:pre-line"></p><div id="qreq"></div>
     <h2>오늘 미션</h2>
     <p class="note" id="qsn"></p>
     <div id="qstreak" class="dots"></div>
@@ -926,7 +926,7 @@
 
 <dialog id="annc" class="box"><img src="./ui/boss.webp" alt="멸망의 용암 군주" width="720" height="450">
   <span class="tag">새 소식 · 보스전</span><h2>멸망의 용암 군주가 깨어났다!</h2>
-  <p id="anwhen"></p>
+  <p id="anwhen"></p><p id="anday" class="anday"></p>
   <ul><li>매시 정각부터 30분 동안 화산 들판에 나타나요</li><li>주민들이 함께 때려야 쓰러져요. 빨간 예고가 뜨면 <b>피하기</b></li><li>많이 때린 만큼 코인, 그리고 보스전에서만 얻는 울트라 공룡</li></ul>
   <div class="end"><button class="ghost" id="anx">닫기</button><button id="ango">보스전 가기</button></div></dialog>
 <dialog id="how" class="box">
@@ -1032,6 +1032,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=93088fc7"></script>
+<script type="module" src="./app.js?v=773b8c88"></script>
 </body>
 </html>
