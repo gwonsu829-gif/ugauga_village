@@ -195,7 +195,7 @@
   #cpic { flex:none; width:62px; height:62px; border-radius:16px; background:radial-gradient(circle at 50% 40%,rgba(255,194,63,.28),rgba(255,194,63,.05) 70%); border:2px solid rgba(255,194,63,.45); box-shadow:inset 0 0 12px rgba(0,0,0,.4); }
   #cpic.r1 { border-color:#ffc23f; box-shadow:0 0 12px rgba(255,194,63,.5); } #cpic.r2 { border-color:#ff7ad9; box-shadow:0 0 14px rgba(255,122,217,.5); }
   #card b { font-family:var(--head); font-weight:400; font-size:18px; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin:0; line-height:1.2; text-align:left; }
-  #card p { margin:0; font-size:12px; line-height:1.45; color:var(--ink2); text-align:left; }
+  #card p { margin:0; font-size:12px; line-height:1.45; color:var(--ink2); text-align:left; white-space:pre-line; max-height:60vh; overflow:auto; } /* 11-28: 줄바꿈(순위표·보스 결과)을 살린다 */
   #cinfo { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px !important; }
   #cinfo span { padding:2px 8px; border-radius:999px; font-size:11px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); white-space:nowrap; }
   #cinfo span.hot { color:#2a1606; background:linear-gradient(180deg,#ffe28a,var(--gold)); border-color:#ffe7a8; font-weight:800; }
@@ -1034,6 +1034,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=0de6269a"></script>
+<script type="module" src="./app.js?v=228eb9db"></script>
 </body>
 </html>
