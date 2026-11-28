@@ -421,7 +421,7 @@
   .zegg { display:grid; grid-template-columns:64px 1fr; gap:4px 12px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:16px; border:2px solid var(--ec); background:linear-gradient(135deg,color-mix(in srgb,var(--ec) 28%,transparent),rgba(255,255,255,.02)); }
   .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
   .wg { border-color:#6ad08a; background:rgba(74,208,106,.1); } .wg b { color:#9ff0b4 !important; } .wg i { background:linear-gradient(90deg,#4ad06a var(--p),rgba(255,255,255,.12) var(--p)) !important; } .wg.done { border-color:var(--gold); } .wg button { margin-top:6px; }
-  .zshard { border-color:#ff6a2a; background:rgba(255,90,26,.12); } .zshard b { color:#ffb46a !important; } .zshard i { background:linear-gradient(90deg,#ff5a1a var(--p),rgba(255,255,255,.12) var(--p)) !important; } .zshard button { margin-top:6px; }
+  .zshard { border-color:var(--sc,#ff6a2a); background:color-mix(in srgb,var(--sc,#ff5a1a) 12%,transparent); } .zshard b { color:color-mix(in srgb,var(--sc,#ff5a1a) 60%,#fff) !important; } .zshard i { background:linear-gradient(90deg,var(--sc,#ff5a1a) var(--p),rgba(255,255,255,.12) var(--p)) !important; } .zshard button { margin-top:6px; }
   .zpity { display:grid; gap:2px; padding:10px 14px; margin-bottom:10px; border-radius:14px; border:2px solid #ffd36a; background:rgba(255,211,106,.1); } .zpity b { font-family:var(--head); font-weight:400; font-size:15px; color:#ffd36a; } .zpity small { font-size:11.5px; color:var(--ink2); } .zpity i { display:block; height:8px; margin-top:6px; border-radius:8px; background:linear-gradient(90deg,#ffd36a var(--p),rgba(255,255,255,.12) var(--p)); }
   /* 11-28 부족 의뢰 */
   .qr { display:grid; grid-template-columns:1fr auto; gap:4px 10px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:14px; border:2px solid var(--line); background:rgba(255,255,255,.04); }
@@ -451,7 +451,7 @@
   #boss { position:fixed; z-index:15; left:0; right:0; margin:0 auto; bottom:calc(14px + var(--sb,0px)); width:min(480px,calc(100vw - 16px)); display:grid; gap:8px; } /* transform을 쓰면 안쪽 position:fixed(보스 HP 띠)가 이 상자 기준이 된다 */
   body.bossing :is(#menu,#next,#news) { display:none !important; }
   #boss .bh { position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); width:min(560px,calc(100vw - 16px)); padding:8px 12px; border-radius:14px; background:rgba(20,8,6,.85); border:2px solid #ff6a2a; color:#ffe9c8; display:grid; grid-template-columns:1fr auto; gap:4px; }
-  #boss .bh b { font-family:var(--head); font-weight:400; color:#ffb46a; } #boss .bh span { font-size:12px; } #boss .bh i { grid-column:1 / -1; height:16px; border-radius:9px; background:#3a1208; overflow:hidden; }
+  #boss .bh b { font-family:var(--head); font-weight:400; color:#ffb46a; } #boss .bh { border-color:var(--bc,#ff6a2a) !important; } #boss[style*='2affc0'] .bh u { background:linear-gradient(90deg,#14b88a,#7affd8); } #boss[style*='2affc0'] .bh b { color:#9fffe0; } #boss .bh span { font-size:12px; } #boss .bh i { grid-column:1 / -1; height:16px; border-radius:9px; background:#3a1208; overflow:hidden; }
   #boss .bh u { display:block; height:100%; background:linear-gradient(90deg,#ff3a1a,#ffb02a); transition:width .25s; } #btop { position:fixed; top:calc(84px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); font-size:11.5px; color:#ffe9c8; text-shadow:0 1px 3px #000; white-space:nowrap; }
   #boss .bm { padding:6px 10px; border-radius:12px; background:rgba(16,22,18,.85); color:#f6ecd8; font-size:12px; } #boss .bm i { display:block; height:8px; margin-top:4px; border-radius:6px; background:#2a3a2e; overflow:hidden; } #boss .bm u { display:block; height:100%; background:#4ad06a; transition:width .3s; }
   #bbtn { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; } #bbtn button { position:relative; overflow:hidden; min-height:58px; font-size:14px; }
@@ -927,10 +927,10 @@
   </div>
 </div>
 
-<dialog id="annc" class="box"><img src="./ui/boss.webp" alt="멸망의 용암 군주" width="720" height="450">
-  <span class="tag">새 소식 · 보스전</span><h2>멸망의 용암 군주가 깨어났다!</h2>
+<dialog id="annc" class="box"><img id="animg" src="./ui/boss.webp" alt="" width="720" height="450">
+  <span class="tag">새 소식 · 보스전</span><h2 id="anh">멸망의 용암 군주가 깨어났다!</h2>
   <p id="anwhen"></p><p id="anday" class="anday"></p>
-  <ul><li>매시 정각부터 30분 동안 화산 들판에 나타나요</li><li>주민들이 함께 때려야 쓰러져요. 빨간 예고가 뜨면 <b>피하기</b></li><li>많이 때린 만큼 코인, 그리고 보스전에서만 얻는 울트라 공룡</li></ul>
+  <ul><li>매시 정각부터 30분 동안 화산 들판에 나타나요. 짝수 시는 멸망의 용암 군주, 홀수 시는 새 보스 뼈갑옷 독룡</li><li>주민들이 함께 때려야 쓰러져요. 빨간 예고가 뜨면 <b>피하기</b></li><li>많이 때린 만큼 코인과 보스 조각. 조각은 보스마다 따로 모아요</li></ul>
   <div class="end"><button class="ghost" id="anx">닫기</button><button id="ango">보스전 가기</button></div></dialog>
 <dialog id="how" class="box">
   <h2>알 받는 법</h2>
@@ -987,8 +987,8 @@
 </dialog>
 
 <canvas id="arena" hidden></canvas><div id="arhud" hidden></div><div id="pops"></div>
-<div id="bossbar" hidden><b>보스 출현!</b> <span>멸망의 용암 군주</span> <em id="bossleft"></em> <button id="bossgo">보스전 가기</button></div>
-<div id="boss" hidden><div class="bh"><b>멸망의 용암 군주</b><span id="bhpt"></span><i><u id="bhp"></u></i></div><div id="btop"></div>
+<div id="bossbar" hidden><b>보스 출현!</b> <span class="bossname">멸망의 용암 군주</span> <em id="bossleft"></em> <button id="bossgo">보스전 가기</button></div>
+<div id="boss" hidden><div class="bh"><b class="bossname">멸망의 용암 군주</b><span id="bhpt"></span><i><u id="bhp"></u></i></div><div id="btop"></div>
   <div class="bm"><span id="bmet"></span><i><u id="bme"></u></i></div>
   <div id="bbtn"><button data-k="0">물기</button><button data-k="1">강타</button><button data-k="2">공룡 스킬</button><button class="dodge">피하기</button></div></div>
 <div id="bwarn" hidden></div>
@@ -1035,6 +1035,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=a365045b"></script>
+<script type="module" src="./app.js?v=250c2995"></script>
 </body>
 </html>
