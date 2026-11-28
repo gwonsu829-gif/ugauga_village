@@ -895,6 +895,248 @@
     #zrev.open #zrgrade { transform:translateX(-50%) rotate(-3deg); }
     #zrev.open #zrnew:not([hidden]) { transform:rotate(10deg) scale(1); }
   }
+
+  /* Jungle craft skin — CSS only. Existing game state owns visibility, positions and progress. */
+  :root { --gold:#ffd16a; --gold2:#efaa24; --edge:#bb762b; --bark:#623618;
+    --glass:linear-gradient(155deg,#71411f,#3d210f); --border-soft:#b17a3d;
+    --shadow-hud:0 5px 12px #160c0866; }
+  :is(#sheet,#card,dialog.box,#intro > .box) {
+    --ink:#4a2b14; --ink2:#7a5532; --line:#a9793d55; --paper:#f5d9a1; --paper2:#eaca91;
+    color:var(--ink); background:none; border:solid transparent; border-width:33px 16px 30px;
+    border-image:url('./ui/kit/frame.webp') 100 48 90 48 fill / 33px 16px 30px / 0 stretch;
+    border-radius:0; box-shadow:0 12px 25px #160c0866; backdrop-filter:none; -webkit-backdrop-filter:none;
+    text-shadow:none; isolation:isolate;
+  }
+  #sheet { padding:8px 10px 12px; scrollbar-color:#9b6237 #efd097; }
+  #sheet::before { display:none; }
+  #card { padding:10px 9px 12px; }
+  dialog.box { padding:10px 12px 14px; max-height:calc(100dvh - 24px); }
+  #annc { padding:0 0 12px; border-width:33px 16px 30px; border-color:transparent; overflow:auto; }
+  #intro > .box { padding:12px; }
+  :is(#sheet,#card,dialog.box,#intro > .box) :is(p,small,.note,li,label,.st b,.sp small) { color:var(--ink2); }
+  :is(#sheet,#card,dialog.box) :is(h2,h3,b,strong,.coinbig,.coinline,.cnt,.cprice,.st span,.hood b) { color:var(--ink); }
+  :is(#sheet,#card,dialog.box) :is(.zpity,.season,.zshard,.wg) > b { color:#633714 !important; }
+  :is(#sheet,#card,dialog.box) :is(.st em,#msg,.grow,#clog b) { color:#3e7025; }
+  #annc :is(p,ul,.anday),#intro .sub { color:#70421f; }
+  :is(#sheet,#card,dialog.box) input { background:#fff1ce; color:#4a2b14; border-color:#ba8951; box-shadow:inset 0 2px 4px #80502726; }
+  :is(#sheet,#card,dialog.box) input::placeholder { color:#89613b; }
+  :is(#sheet > [data-tab] > h2:first-of-type,#sheet .shophead > h2:first-of-type,dialog.box > h2:first-of-type) {
+    position:relative; display:flex; align-items:center; justify-content:center; text-align:center;
+    width:min(100%,260px); min-height:134px; padding:64px 36px 30px; margin:-28px auto 8px;
+    background:url('./ui/kit/banner.webp') center/100% 100% no-repeat;
+    color:#fff2ce; font-size:clamp(17px,4.6vw,22px); line-height:1.25;
+    text-shadow:0 2px 0 #49230f,1px 0 #49230f,-1px 0 #49230f,0 3px 4px #301207;
+    transform-origin:50% 0; animation:tribal-banner .65s .09s both;
+  }
+  #sheet .shophead { flex-wrap:wrap; }
+  #sheet .shophead > h2:first-of-type { flex:0 0 100%; }
+  #sheet h2.gap { color:#623718; border-bottom:1px solid #b9803d66; padding-bottom:7px; }
+  :is(#sheet .x,#card .x,dialog.box .x,.x) {
+    width:44px; height:46px; min-width:44px; min-height:44px; padding:0;
+    border:0; border-image:none; border-radius:0; background:url('./ui/kit/close.webp') center/contain no-repeat;
+    box-shadow:none; color:transparent; font-size:0; text-shadow:none; z-index:5;
+  }
+  .x::before { display:none; }
+  #sheet .x { top:0; margin:-22px -17px 0 0; }
+  #card .x,dialog.box .x { top:-21px; right:-13px; }
+  .x:active:not(:disabled) { background:url('./ui/kit/close.webp') center/contain no-repeat; }
+
+  /* Sliced caps keep the glossy sculpted ends at their native proportions. */
+  :is(button,.btn) { color:#fff5d7; text-shadow:0 2px 1px #59240c,1px 0 #59240c,-1px 0 #59240c;
+    background:none; border:solid transparent; border-width:0 28px; border-radius:0;
+    border-image:url('./ui/kit/btn_orange.webp') 0 150 fill / 0 38px / 0 stretch;
+    box-shadow:none; min-height:44px; padding:8px 4px; position:relative;
+    transition:transform 350ms cubic-bezier(.2,1.6,.35,1); }
+  :is(button,.btn).ghost,.seg button { background:none; color:#fff5d7; border-color:transparent;
+    border-image:url('./ui/kit/btn_teal.webp') 0 65 fill / 0 19px / 0 stretch; border-width:0 15px; box-shadow:none; }
+  :is(button,.btn).dark,.seg button.on { background:none; color:#fff5d7; border-color:transparent;
+    border-image:url('./ui/kit/btn_green.webp') 0 65 fill / 0 19px / 0 stretch; border-width:0 15px; box-shadow:none; }
+  :is(#sheet,#card,dialog.box) :is(button,.btn) { color:#fff5d7; }
+  :is(#sheet,#card,dialog.box) :is(button,.btn) :is(b,small,span) { color:inherit; }
+  :is(.mini,.chip) { min-height:40px; border-width:0 12px; padding:6px 5px; }
+  .chip { background:#e4bd7c; border:1px solid #b18549; border-image:none; border-radius:12px;
+    color:#69411f; text-shadow:none; padding:6px 12px; box-shadow:inset 0 1px #fff2d1; }
+  :is(#sheet,#card,dialog.box) .chip { color:#69411f; }
+  .chip.on { background:linear-gradient(#ffdc78,#edac35); color:#4a2b14; border-color:#9e5d19; }
+  :is(button,.btn):active:not(:disabled),#side > button:active,#menu button:active,.chip:active:not(:disabled),.x:active:not(:disabled) {
+    transform:scale(.94,.9); box-shadow:none; transition-duration:80ms; }
+  :is(button,.btn):disabled { opacity:.6; }
+  :is(button,.btn,input,[tabindex]):focus-visible { outline:3px solid #2b8066; outline-offset:3px; }
+  /* Only one primary action per visible window receives the recurring sweep. */
+  :is(#cfeed,#sheet > div:not([hidden]) > .drawbox > .wide,dialog[open] .end > :last-child:not(.ghost)) { overflow:hidden; }
+  :is(#cfeed,#sheet > div:not([hidden]) > .drawbox > .wide,dialog[open] .end > :last-child:not(.ghost))::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(110deg,transparent 35%,#fff8c777 49%,transparent 63%);
+    transform:translateX(-120%); animation:tribal-shine 4.4s 1s infinite;
+  }
+  /* Wood HUD: preserve the compact footprints and all mode-specific placement. */
+  #hud { background:none; border:0; border-image:none; border-radius:0; padding:7px 13px 7px 5px;
+    background-image:url('./ui/kit/nameplate.webp'); background-size:100% 100%; box-shadow:none;
+    color:#fff0cf; text-shadow:0 2px 2px #2c1409; }
+  #hud h1 small { color:#f5d8a5; background:#3c220b99; }
+  #hud p { color:#ead4ab; }
+  #hud #vnext { color:#ffe17c; }
+  #hud #medal { background:radial-gradient(circle at 35% 25%,#dfbd68,#8b6020); color:#fff4c6; border-color:#c7a64b; }
+  #tr .cur .mini { min-height:40px; border:solid transparent; border-width:0 12px 0 32px; border-radius:0;
+    border-image:url('./ui/kit/counter.webp') 0 145 0 50 fill / 0 16px 0 43px / 0 stretch;
+    background:none; padding:5px 2px; gap:4px; color:#fff1d3; box-shadow:none; }
+  #tr .cur .mini::before { position:absolute; left:-29px; top:50%; transform:translateY(-50%); }
+  #clock,#online { background:linear-gradient(#794823,#4e2a14); color:#f1d9ae; border-color:#a5753c; box-shadow:0 3px 6px #160c0855; }
+  #menu { background:none; border:0; border-image:none; border-radius:0; box-shadow:none; padding:3px 0; gap:4px; }
+  #menu button,#menu #myegg { background:url('./ui/kit/tab.webp') center/100% 100% no-repeat;
+    border:0; border-image:none; border-radius:0; min-height:68px; padding:8px 0 7px; color:#fff0ce;
+    box-shadow:none; font-size:12px; text-shadow:0 2px 1px #35180a; }
+  #menu button.on,#menu #myegg.on { background:url('./ui/kit/tab_on.webp') center/100% 100% no-repeat;
+    color:#fff8d7; border:0; box-shadow:none; transform:translateY(-4px); animation:tribal-tab .55s both; }
+  #menu button.on::before { animation:tribal-leaf .65s; transform-origin:50% 100%; }
+  #side > button,#side > #join { background:url('./ui/kit/ring.webp') center/100% 100% no-repeat;
+    border:0; border-image:none; border-radius:0; box-shadow:none; color:#fff0ce; min-height:52px; padding:5px 2px;
+    text-shadow:0 2px 2px #30160b; }
+  #side > button::before { filter:drop-shadow(0 2px 1px #28140899); }
+  .dot::after { width:14px; height:14px; background:url('./ui/kit/dot.webp') center/contain no-repeat; box-shadow:none; animation:tribal-dot 2.4s infinite; }
+  #side > .dot:first-of-type,#side > #qbtn.hot { animation:tribal-bob 3.6s ease-in-out infinite; }
+  #side > #qbtn.hot::after { content:''; position:absolute; right:0; top:0; width:14px; height:14px;
+    background:url('./ui/kit/dot.webp') center/contain no-repeat; animation:tribal-dot 2.4s infinite; }
+
+  :is(.qr,.zpity,.list > *,.zcard,.scard,.zup,.zbank,.gearrow,.hood,.drawbox) {
+    background:none; border:solid transparent; border-width:10px;
+    border-image:url('./ui/kit/row.webp') 40 fill / 10px / 0 stretch;
+    border-radius:0; color:#4a2b14; text-shadow:none; box-shadow:0 3px 5px #6d3c131a;
+  }
+  :is(.qr,.zpity,.zcard,.scard) { padding:7px; }
+  :is(.qr,.zpity,.list > *,.zcard,.scard) small { color:#7a5532; }
+  .zcard { border-image-outset:0; }
+  .zcard:is(.g3,.g4,.g5) { box-shadow:0 0 0 1px var(--gc),0 3px 10px #5e341c33; }
+  .zcard canvas { background:radial-gradient(ellipse,#f9e6b5,#c0a26a); }
+  :is(.dots span,.chips span,.sp) { background:#dfbd82; color:#78542d; border:1px solid #b48a4a; border-image:none;
+    border-radius:10px; text-shadow:none; box-shadow:inset 0 1px #fff0bc; }
+  .sp { padding:5px 0; min-width:0; min-height:48px; }
+  .sp b { color:#5a3719 !important; }
+  .sp.can { background:linear-gradient(#ffe69a,#f2b63e); border-color:#bc7921; color:#4a2b14 !important; }
+  .sp.can b { color:#4a2b14 !important; }
+  .sp.can small { color:#71471d !important; }
+  .sp.big { border-color:#bd6725; }
+  #cinfo span { background:#e8c78e; color:#71502a; border-color:#b08446; }
+  #cpic { border-color:#b28a41; background:radial-gradient(circle,#f1d6a3,#a48e52); }
+  #ctiles > :is(button,a),#cshare > button { background:url('./ui/kit/tab.webp') center/100% 100% no-repeat;
+    border:0; border-image:none; border-radius:0; color:#fff0ce; min-height:60px; text-shadow:0 2px 1px #35180a; }
+  #ctiles #clink { background-image:url('./ui/kit/tab_on.webp'); }
+
+  /* Track + fill are separate: inline width and --p still come from the game. */
+  :is(.bar,.pbar,.hpb i,.arb i,#boss .bh i,#boss .bm i,.st i,.qr i,.hood i,.zpity i,.season i) {
+    position:relative; background:url('./ui/kit/bar_track.webp') center/100% 100% no-repeat !important;
+    box-shadow:none; border-radius:999px; overflow:hidden; min-height:12px; }
+  :is(.bar i,.pbar u,.hpb u,.arb u,#bhp,#bme,.st u,.qr i u,.hood u,.zfacts .st i u) {
+    display:block; position:relative; background:url('./ui/kit/bar_fill.webp') center/100% 100% no-repeat;
+    box-shadow:none; border-radius:inherit; overflow:hidden; transition:width .55s cubic-bezier(.2,.8,.2,1); }
+  .zpity i::before { content:''; position:absolute; inset:1px auto 1px 0; width:clamp(0%,var(--p,0%),100%);
+    background:url('./ui/kit/bar_fill.webp') center/100% 100% no-repeat; border-radius:inherit; transition:width .55s ease-out; }
+  :is(.bar i,.pbar u,.hpb u,.arb u,#bhp,#bme,.st u,.qr i u,.hood u,.zpity i)::after {
+    content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(105deg,transparent 35%,#fff9c199 50%,transparent 65%);
+    transform:translateX(-110%); animation:tribal-shine 1.2s .4s 1; }
+  .zpity i::after { width:clamp(0%,var(--p,0%),100%); }
+  .qr.done,.sp.can,.zpity:has(.wide:not(:disabled)) { position:relative; isolation:isolate; }
+  :is(.qr.done,.sp.can,.zpity:has(.wide:not(:disabled)))::before {
+    content:''; position:absolute; inset:-3px; border:2px solid #ffc443; border-radius:12px;
+    box-shadow:0 0 13px #ffbe4277; pointer-events:none; z-index:-1; opacity:.5; }
+  /* One breathing glow per visible content area; other rewards keep a static halo. */
+  :is(#sheet,dialog[open]) :is(.qr.done,.sp.can,.zpity:has(.wide:not(:disabled))):not(:has(~ :is(.qr.done,.sp.can,.zpity:has(.wide:not(:disabled)))))::before {
+    animation:tribal-glow 2.8s ease-in-out infinite; }
+  #evbar,#evbar.camp,#evbar.boom,#bossbar { background:linear-gradient(145deg,#994721,#5c2d16);
+    border:2px solid #bf8448; color:#fff0d2; text-shadow:0 2px 1px #41200f; box-shadow:0 5px 12px #200d0755; }
+  #evbar button,#bossbar button { background:none; border:solid transparent; border-width:0 17px;
+    border-image:url('./ui/kit/btn_orange.webp') 0 150 fill / 0 24px / 0 stretch; color:#fff1d2; box-shadow:none; }
+  #boss .bh,#boss .bm { background:linear-gradient(150deg,#744624,#3e2315); border-color:#bd884e; }
+  #bbtn .dodge { background:none; border-image:url('./ui/kit/btn_green.webp') 0 65 fill / 0 19px / 0 stretch; color:#fff5d7; }
+  /* #bbtn ::after is intentionally untouched: --cd owns its cooldown mask. */
+  #toast p { background:linear-gradient(#84522d,#4a2915); border:2px solid #c0924d; color:#fff3d4;
+    box-shadow:0 5px 12px #1f0e0866; animation:tribal-toast .48s both; }
+  #sheet:not([hidden]),#card:not([hidden]) { animation:tribal-window .5s both; }
+  dialog.box[open],#annc[open],#intro:not([hidden]) > .box { animation:tribal-dialog .5s both; }
+  #sheet > [data-tab]:not([hidden]) { animation:none; }
+  :is(.qr,.zpity,.list > *,.zcard,.scard) { animation:tribal-row .38s both; animation-delay:calc(min(var(--i,0),10) * 30ms); }
+  :is(.qr,.zpity,.list > *,.zcard,.scard):nth-child(2) { animation-delay:30ms; }
+  :is(.qr,.zpity,.list > *,.zcard,.scard):nth-child(3) { animation-delay:60ms; }
+  :is(.qr,.zpity,.list > *,.zcard,.scard):nth-child(4) { animation-delay:90ms; }
+  :is(.qr,.zpity,.list > *,.zcard,.scard):nth-child(5) { animation-delay:120ms; }
+  :is(.qr,.zpity,.list > *,.zcard,.scard):nth-child(n+6) { animation-delay:150ms; }
+  #evbar:not([hidden]),#bossbar:not([hidden]) { transform-origin:50% 0; animation:tribal-event .6s both; }
+  @keyframes tribal-window { 0% { opacity:0; transform:translate(-50%,16px) scale(.92); } 65% { opacity:1; transform:translate(-50%,-2px) scale(1.02); } 100% { transform:translate(-50%,0) scale(1); } }
+  @keyframes tribal-dialog { 0% { opacity:0; transform:translateY(16px) scale(.92); } 65% { opacity:1; transform:translateY(-2px) scale(1.02); } 100% { transform:translateY(0) scale(1); } }
+  @keyframes tribal-banner { 0% { opacity:0; transform:translateY(-14px) rotate(-5deg); } 60% { opacity:1; transform:translateY(2px) rotate(2deg); } 80% { transform:rotate(-1deg); } 100% { transform:none; } }
+  @keyframes tribal-row { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:none; } }
+  @keyframes tribal-tab { 0% { transform:translateY(0); } 60% { transform:translateY(-6px) rotate(-1deg); } 100% { transform:translateY(-4px); } }
+  @keyframes tribal-leaf { 25% { transform:rotate(-8deg); } 60% { transform:rotate(5deg); } 100% { transform:rotate(0); } }
+  @keyframes tribal-shine { 0%,72% { opacity:0; transform:translateX(-110%); } 78% { opacity:.8; } 100% { opacity:0; transform:translateX(110%); } }
+  @keyframes tribal-dot { 50% { opacity:.75; transform:scale(.86); } }
+  @keyframes tribal-bob { 50% { transform:translateY(-3px); } }
+  @keyframes tribal-glow { 50% { opacity:1; transform:scale(1.015); } }
+  @keyframes tribal-toast { 0% { opacity:0; transform:translateY(-18px) scale(.95); } 65% { opacity:1; transform:translateY(3px) scale(1.02); } 100% { transform:none; } }
+  @keyframes tribal-event { 0% { opacity:0; transform:translate(-50%,-12px) rotate(-2deg); } 60% { opacity:1; transform:translate(-50%,2px) rotate(1deg); } 100% { transform:translate(-50%,0); } }
+  @media (hover:hover) { #menu button.on:hover { transform:translateY(-5px); } :is(button,.btn):active:not(:disabled),#side > button:active,#menu button:active { transform:scale(.94,.9); } }
+  @media (max-width:370px) {
+    #sheet { padding:6px 7px 10px; } #card { padding:8px 7px; }
+    #hud { padding-right:10px; } #tr .cur .mini { font-size:11px; }
+    #menu button { font-size:11px; min-height:64px; }
+    :is(.qr,.zpity) { padding:5px; } .qr { gap:4px 6px; } .qr button { padding:0 2px; border-width:0 17px; }
+    .stats { grid-template-columns:1fr; } #ctiles { gap:3px; } #ctiles > :is(button,a),#cshare > button { font-size:10px; }
+  }
+  @media (orientation:landscape) and (max-height:520px) {
+    #menu { width:min(400px,calc(100vw - 16px)); } #menu button { min-height:58px; }
+    #sheet,#card { max-height:calc(100dvh - 100px - var(--sb)); }
+    :is(#sheet > [data-tab] > h2:first-of-type,#sheet .shophead > h2:first-of-type,dialog.box > h2:first-of-type) {
+      width:200px; min-height:104px; padding:49px 27px 22px; font-size:17px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  }
+
+
+  /* Layout checks: keep the floating close target inside the scrollable viewport. */
+  #sheet,#card { overflow-x:hidden; }
+  #sheet > [data-tab=quest] { display:flex; flex-direction:column; }
+  #sheet > [data-tab=quest] > h2:first-of-type { order:-1; flex-shrink:0; }
+  :is(.bar,.pbar,.hpb i,.arb i,#boss .bh i,#boss .bm i,.st i,.qr i,.hood i,.zpity i,.season i) {
+    background:none !important; border:solid transparent; border-width:0 8px;
+    border-image:url('./ui/kit/bar_track.webp') 0 70 fill / 0 8px / 0 stretch; }
+  :is(.bar i,.pbar u,.hpb u,.arb u,#bhp,#bme,.st u,.qr i u,.hood u,.zfacts .st i u),.zpity i::before {
+    background:none; border:solid transparent; border-width:0;
+    border-image:url('./ui/kit/bar_fill.webp') 0 46 fill / 0 6px / 0 stretch; }
+  .zpity i::before { inset:1px auto 1px 0; }
+  :is(#sheet,dialog[open]) :is(.qr.done,.sp.can,.zpity:has(.wide:not(:disabled)))::before { animation:none; }
+  /* The first available reward alone breathes; all other halos are static. */
+  #sheet:has(.zpity .wide:not(:disabled)) .zpity:has(.wide:not(:disabled)):not(:has(~ .zpity .wide:not(:disabled)))::before,
+  #sheet:not(:has(.zpity .wide:not(:disabled))) .qr.done:first-child::before { animation:tribal-glow 2.8s ease-in-out infinite; }
+  #side > .dot:first-of-type { animation:none; }
+  #side > .dot:not(:has(~ .dot)),#side > #qbtn.hot { animation:tribal-bob 3.6s ease-in-out infinite; }
+  #side:has(#qbtn.hot) > .dot:not(#qbtn) { animation:none; }
+  /* Reward grids are buttons, but their numbers remain ink on parchment. */
+  :is(#sheet,dialog.box) .sp { color:#78542d; }
+  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } }
+
+
+  .x { position:absolute; }
+  #card .x,dialog.box .x { position:absolute; top:0; right:0; }
+  @property --p { syntax:'<percentage>'; inherits:true; initial-value:0%; }
+  :is(.zpity,.season) i { transition:--p .55s ease-out; }
+  @media (prefers-reduced-motion:reduce) { :is(.zpity,.season) i { transition:none !important; } }
+
+
+  #sheet .x { margin-right:-8px; }
+  #side > #qbtn.hot { background:url('./ui/kit/ring.webp') center/100% 100% no-repeat; border:0; border-image:none; box-shadow:none; }
+  /* Entrance motion releases transform so hover/press can take over afterwards. */
+  :is(.qr,.zpity,.list > *,.zcard,.scard) { animation-fill-mode:backwards; }
+  #menu button.on { animation-fill-mode:backwards; }
+  #side > button:active:not(:disabled),#menu button.on:active:not(:disabled) { animation:none; transform:scale(.94,.9); }
+  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } }
+
+  /* 11-29: 칸처럼 생긴 버튼(장비·장식·가방 칸)은 주황 알약 대신 나무 칸 */
+  :is(.eslot,.dslot,.icell) { border:2px solid #8a5326 !important; border-image:none !important; border-radius:14px !important; padding:6px 4px !important;
+    background:linear-gradient(180deg,#9a6434,#6b3f1d) !important; box-shadow:inset 0 2px 0 rgba(255,220,160,.35), inset 0 -3px 0 rgba(40,18,6,.35), 0 3px 6px rgba(40,18,6,.3) !important;
+    color:#fff1d6 !important; writing-mode:horizontal-tb !important; min-width:0; animation:none !important; }
+  :is(.eslot,.dslot,.icell) > span { white-space:nowrap; font-size:12px; }
+  .dslot.on,.eslot[class*=" r"] { border-color:#ffc04a !important; }
+  .icell small { color:#fff1d6 !important; text-shadow:0 1px 1px #3a1a08 !important; opacity:1 !important; font-weight:700; }
 </style>
 
 </head>
