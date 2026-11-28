@@ -420,6 +420,8 @@
   .zcard.pick { outline:3px solid #ffd36a; }
   .zegg { display:grid; grid-template-columns:64px 1fr; gap:4px 12px; align-items:center; padding:10px 12px; margin-bottom:8px; border-radius:16px; border:2px solid var(--ec); background:linear-gradient(135deg,color-mix(in srgb,var(--ec) 28%,transparent),rgba(255,255,255,.02)); }
   .zegg i { grid-row:1 / 4; width:58px; height:72px; border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%), var(--ec); box-shadow:inset -6px -8px 0 rgba(0,0,0,.25), 0 0 16px var(--ec); justify-self:center; }
+  .season { border-color:#b58cff; background:rgba(150,110,255,.1); } .season b { color:#d9c6ff !important; } .season i { background:linear-gradient(90deg,#9a6aff var(--p),rgba(255,255,255,.12) var(--p)) !important; } .season > button { margin-top:6px; }
+  .sps { display:grid; grid-template-columns:repeat(6,1fr); gap:4px; margin-top:8px; } .sp { display:grid; place-items:center; gap:0; min-height:40px; padding:3px 0; border-radius:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--ink2); font-size:11px; box-shadow:none; } .sp b { font-size:13px; color:var(--ink) !important; } .sp small { font-size:9px; opacity:.8; } .sp.big { border-color:#ff8a3a; } .sp.can { background:linear-gradient(180deg,#ffe28a,#f0b43a); color:#2a1606; border-color:#ffe7a8; } .sp.can b { color:#2a1606 !important; } .sp.can small { color:#5a3410 !important; opacity:1; font-weight:700; } .zpity.season { border-color:#b58cff !important; } .sp.got { opacity:.4; } .sp:disabled { cursor:default; }
   .wg { border-color:#6ad08a; background:rgba(74,208,106,.1); } .wg b { color:#9ff0b4 !important; } .wg i { background:linear-gradient(90deg,#4ad06a var(--p),rgba(255,255,255,.12) var(--p)) !important; } .wg.done { border-color:var(--gold); } .wg button { margin-top:6px; }
   .zshard { border-color:var(--sc,#ff6a2a); background:color-mix(in srgb,var(--sc,#ff5a1a) 12%,transparent); } .zshard b { color:color-mix(in srgb,var(--sc,#ff5a1a) 60%,#fff) !important; } .zshard i { background:linear-gradient(90deg,var(--sc,#ff5a1a) var(--p),rgba(255,255,255,.12) var(--p)) !important; } .zshard button { margin-top:6px; }
   .zpity { display:grid; gap:2px; padding:10px 14px; margin-bottom:10px; border-radius:14px; border:2px solid #ffd36a; background:rgba(255,211,106,.1); } .zpity b { font-family:var(--head); font-weight:400; font-size:15px; color:#ffd36a; } .zpity small { font-size:11.5px; color:var(--ink2); } .zpity i { display:block; height:8px; margin-top:6px; border-radius:8px; background:linear-gradient(90deg,#ffd36a var(--p),rgba(255,255,255,.12) var(--p)); }
@@ -807,7 +809,7 @@
     <div id="hoodlist" class="hoods"></div>
   </div>
   <div data-tab="quest">
-    <div id="wgoal"></div>
+    <div id="season"></div><div id="wgoal"></div>
     <h2>부족 의뢰</h2><p class="note" id="qrn" style="white-space:pre-line"></p><div id="qreq"></div>
     <h2>오늘 미션</h2>
     <p class="note" id="qsn"></p>
@@ -1034,6 +1036,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=228eb9db"></script>
+<script type="module" src="./app.js?v=f4d7120b"></script>
 </body>
 </html>
