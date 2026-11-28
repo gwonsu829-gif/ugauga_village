@@ -447,7 +447,7 @@
   #bossbar[hidden], #boss[hidden], #bwarn[hidden], #arhud[hidden] { display:none; }
   #bossbar b { font-family:var(--head); font-weight:400; color:#ffd34a; } #bossbar em { font-style:normal; font-weight:800; color:#fff; background:rgba(0,0,0,.3); padding:2px 8px; border-radius:999px; } #bossbar button { min-height:34px; padding:0 12px; font-size:13px; } @keyframes bossglow { 50% { box-shadow:0 0 40px rgba(255,90,20,.9); } }
   @media (max-width:600px) { #bossbar { font-size:11.5px; top:calc(78px + env(safe-area-inset-top,0px)); } } /* 휴대폰: 오른쪽 위 먹이·시계 아래로(겹치지 않게) */
-  body.walking #bossbar { top:auto; bottom:calc(186px + var(--sb,0px)); } body.walking #bossbar span { display:none; } @media (max-height:520px) { body.walking #bossbar { bottom:calc(14px + var(--sb,0px)); } } /* 가로 화면: 조이스틱과 산책 끝 사이 */ /* 산책 중엔 위쪽 안내문과 안 겹치게 조이스틱 위로 */
+  body.walking #bossbar { top:auto; bottom:calc(226px + var(--sb,0px)); } /* 11-28: 족장 한 줄(#wline, 아래 170px) 위로 */ body.walking #bossbar span { display:none; } @media (max-height:520px) { body.walking #bossbar { bottom:calc(14px + var(--sb,0px)); } } /* 가로 화면: 조이스틱과 산책 끝 사이 */ /* 산책 중엔 위쪽 안내문과 안 겹치게 조이스틱 위로 */
   #boss { position:fixed; z-index:15; left:0; right:0; margin:0 auto; bottom:calc(14px + var(--sb,0px)); width:min(480px,calc(100vw - 16px)); display:grid; gap:8px; } /* transform을 쓰면 안쪽 position:fixed(보스 HP 띠)가 이 상자 기준이 된다 */
   body.bossing :is(#menu,#next,#news) { display:none !important; }
   #boss .bh { position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); left:50%; transform:translateX(-50%); width:min(560px,calc(100vw - 16px)); padding:8px 12px; border-radius:14px; background:rgba(20,8,6,.85); border:2px solid #ff6a2a; color:#ffe9c8; display:grid; grid-template-columns:1fr auto; gap:4px; }
@@ -702,7 +702,6 @@
   #photo img { display:block; width:100%; max-height:56vh; object-fit:contain; border-radius:16px; margin-bottom:10px; background:#e9dcc3; box-shadow:0 6px 18px rgba(43,29,16,.2); }
   @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
-
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -1035,6 +1034,6 @@
   </div>
 </dialog>
 
-<script type="module" src="./app.js?v=250c2995"></script>
+<script type="module" src="./app.js?v=0de6269a"></script>
 </body>
 </html>
